@@ -40,12 +40,14 @@ npm run dev        # vite dev server on :5173
 npm run build      # tsc --noEmit && vite build
 npm run preview    # serve dist on :4173
 npm run typecheck  # tsc --noEmit
+npm run test:backend  # runs backend/Code.gs against a stubbed Apps Script runtime
 ```
 
 ## Folder structure
 
 ```
 backend/                 Code.gs + appsscript.json, pasted into the Apps Script editor
+backend/test/harness.cjs Stubbed Apps Script runtime, run with npm run test:backend
 public/media/            swenson.mp4, empathy.mp4
 public/images/           1910-building.jpg and the rest of the archival photos
 public/textures/         pre-rendered paper grain, tape, torn edges, halftone, ink blots
@@ -99,7 +101,7 @@ src/styles/              theme.css (tokens), global.css, presenter.css
 
 1. ✅ Scaffold, routing, BroadcastChannel sync, presenter controls, placeholder sections.
 2. ✅ `#/styleguide` — every collage component, palette, type scale, each motion. Awaiting the check on the hospital projector.
-3. `/backend` Apps Script + `SETUP.md`. Deployed by hand; URL goes in `src/config.ts`.
+3. ✅ `/backend` Apps Script + `SETUP.md` written and logic-tested. Still to be deployed by hand; the URL then goes in `src/config.ts`.
 4. Live modules wired to the backend, then `#/test` with 150 simulated phones.
 5. Full content screens, `#/print`, service worker, `web-design-guidelines` audit, GitHub Pages deploy.
 
