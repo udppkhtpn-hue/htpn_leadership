@@ -127,8 +127,11 @@ src/styles/              theme.css (tokens), global.css, presenter.css
 2. ✅ `#/styleguide` — every collage component, palette, type scale, each motion. Awaiting the check on the hospital projector.
 3. ✅ `/backend` Apps Script + `SETUP.md`. Deployed; the URL is in `src/config.ts`.
 4. ✅ Live modules wired to the backend, phone UIs, moderation queue, `#/test` and `npm run test:load`.
-5. ✅ Full content screens, `#/print`, service worker, `web-design-guidelines` audit. Deploy
-   workflow written; Pages not yet enabled and nothing pushed.
+5. ✅ Full content screens, `#/print`, service worker, `web-design-guidelines` audit, deployed.
+
+Live at **https://udppkhtpn-hue.github.io/htpn_leadership/** — `#/present` on the
+projector, `#/presenter` on the laptop, `#/join` on phones (the QR code on screen
+points there). Every push to `main` redeploys it.
 
 Media and copy still outstanding: see `ASSETS.md`.
 
