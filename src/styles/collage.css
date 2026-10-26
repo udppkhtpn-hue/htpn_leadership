@@ -10,14 +10,14 @@
   position: absolute;
   inset: 0;
   pointer-events: none;
-  background-image: url('/textures/paper-grain.svg');
+  background-image: url('../textures/paper-grain.svg');
   background-size: 420px 420px;
   mix-blend-mode: multiply;
   opacity: 0.4;
 }
 
 .grain--fibre {
-  background-image: url('/textures/paper-fibre.svg');
+  background-image: url('../textures/paper-fibre.svg');
   background-size: 600px 600px;
   opacity: 0.5;
 }
@@ -44,7 +44,7 @@
 .cutout__halftone {
   position: absolute;
   inset: 0;
-  background-image: url('/textures/halftone.svg');
+  background-image: url('../textures/halftone.svg');
   background-size: 6px 6px;
   mix-blend-mode: multiply;
   opacity: 0.35;

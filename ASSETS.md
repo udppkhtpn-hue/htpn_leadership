@@ -22,7 +22,7 @@ captions if you can: a hall of 150 will not all hear a laptop's audio.
 
 | File | Used on |
 |---|---|
-| `1910-building.jpg` | Cold open, and again in Act III — the same element morphs between them |
+| ~~`1910-building.jpg`~~ → `kajang-hospital-1984.jpg` ✅ | Cold open, and again in Act III — the same element morphs between them |
 | `ward-corridor.jpg` | Cold open margin |
 | `old-equipment.jpg` | Cold open margin |
 | `hands-handover.jpg` | "You have already led today" |
@@ -32,9 +32,17 @@ captions if you can: a hall of 150 will not all hear a laptop's audio.
 | `staff-portrait-3.jpg` | spare |
 | `htpn-facade-today.jpg` | spare |
 
-`1910-building.jpg` carries the most weight: it opens the talk and returns in
-Act III as the same photograph, so pick one that reads at 3 metres and survives
-being torn at the edges.
+The cold-open photograph carries the most weight: it opens the talk and returns
+in Act III as the same element. `kajang-hospital-1984.jpg` is in and wired to
+both. It is a 1984 front view with an archival caption burned into the top
+right, which reads as a scan on the torn cutout — deliberate, but crop it if you
+would rather it were clean.
+
+One thing to settle: the talk's line is that the **1910** block is still in use,
+while this photograph is dated 1984. If the building in frame is that block,
+the stamp can say so (`'The 1910 block, photographed 1984'`); if not, it wants a
+separate 1910-era image. Both the stamp and the alt text live on the `cold-open`
+and `building-return` sections in `src/content/sections.ts`.
 
 ## Textures — `public/textures/`
 

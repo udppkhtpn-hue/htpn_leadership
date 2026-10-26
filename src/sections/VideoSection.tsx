@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { Stamp, TapeStrip } from '../collage'
+import { asset } from '../lib/asset'
 import type { Section } from '../content/types'
 
 /**
@@ -47,7 +48,7 @@ export function VideoSection({ section, paused }: { section: Section; paused: bo
         {src && !failed ? (
           <video
             ref={video}
-            src={src}
+            src={asset(src)}
             playsInline
             controls={blocked}
             onError={() => setFailed(true)}

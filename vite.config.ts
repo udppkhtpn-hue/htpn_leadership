@@ -15,7 +15,7 @@ export default defineConfig({
     // mid-talk, videos and fonts included.
     VitePWA({
       registerType: 'autoUpdate',
-      includeAssets: ['textures/*.svg', 'images/*', 'media/*'],
+      includeAssets: ['images/*', 'media/*'],
       workbox: {
         globPatterns: ['**/*.{js,css,html,woff,woff2,svg,png,jpg,jpeg,mp4}'],
         // The two talk videos are the reason this is not the 2 MB default.
