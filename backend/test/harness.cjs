@@ -55,7 +55,7 @@ const props = new Map([['PRESENTER_PIN', '1910']]);
 
 const sandbox = {
   console,
-  SpreadsheetApp: { getActiveSpreadsheet: () => book, openById: () => book },
+  SpreadsheetApp: { getActiveSpreadsheet: () => book, openById: () => book, flush: () => {} },
   CacheService: {
     getScriptCache: () => ({
       get: (k) => (cacheStore.has(k) ? cacheStore.get(k) : null),

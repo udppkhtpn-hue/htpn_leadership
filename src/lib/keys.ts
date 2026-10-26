@@ -18,6 +18,18 @@ export interface KeyActions {
 export function usePresentationKeys(actions: KeyActions, enabled = true) {
   useEffect(() => {
     if (!enabled) return
+
+    // Section numbers run past nine, so digits are buffered briefly: "1" then
+    // "2" within the window jumps to 12, while a lone "7" still jumps to 7.
+    let digits = ''
+    let digitTimer = 0
+    const flushDigits = () => {
+      if (!digits) return
+      const target = Number(digits)
+      digits = ''
+      if (target >= 1) actions.jump(target - 1)
+    }
+
     const onKeyDown = (event: KeyboardEvent) => {
       const target = event.target as HTMLElement | null
       if (target && /^(INPUT|TEXTAREA|SELECT)$/.test(target.tagName)) return
@@ -56,14 +68,19 @@ export function usePresentationKeys(actions: KeyActions, enabled = true) {
           break
         default:
           if (/^[0-9]$/.test(event.key)) {
-            // 1-9 jump to that section, 0 jumps to the tenth.
-            const digit = Number(event.key)
-            actions.jump(digit === 0 ? 9 : digit - 1)
+            digits += event.key
+            window.clearTimeout(digitTimer)
+            // Three digits can only be one section, so go at once.
+            if (digits.length >= 3) flushDigits()
+            else digitTimer = window.setTimeout(flushDigits, 650)
           }
       }
     }
     window.addEventListener('keydown', onKeyDown)
-    return () => window.removeEventListener('keydown', onKeyDown)
+    return () => {
+      window.clearTimeout(digitTimer)
+      window.removeEventListener('keydown', onKeyDown)
+    }
   }, [actions, enabled])
 }
 

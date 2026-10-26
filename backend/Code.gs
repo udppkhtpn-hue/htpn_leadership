@@ -37,6 +37,11 @@ var LIMITS = {
   wordcloud: 30,
   board: 80,
   cacheSeconds: 30,
+  // Results are polled every 2.5s and change constantly, so they cache for far
+  // less time than state. A long TTL here can freeze a stale snapshot: an
+  // append that has not yet committed gets cached as the truth and a vote
+  // appears to vanish.
+  resultsCacheSeconds: 4,
   lockMs: 8000,
   maxWords: 60,
   maxNotes: 120,
@@ -359,7 +364,7 @@ function getResults_(promptId, kind) {
   else if (kind === 'board') data = buildBoardResults_(promptId);
   else data = { words: buildWordResults_(promptId) };
 
-  cache_().put(key, JSON.stringify(data), LIMITS.cacheSeconds);
+  cache_().put(key, JSON.stringify(data), LIMITS.resultsCacheSeconds);
   return data;
 }
 
@@ -420,6 +425,7 @@ function submit_(body) {
       var option = clean_(body.option, 1).toUpperCase();
       if (OPTIONS.indexOf(option) === -1) return ok_({ accepted: false, reason: 'bad option' });
       sheet_(TAB.votes).appendRow([new Date(), promptId, deviceId, option]);
+      SpreadsheetApp.flush();
       invalidateResults_(promptId);
       return ok_({ accepted: true });
     }
@@ -450,6 +456,7 @@ function submit_(body) {
       false,
       flagged,
     ]);
+    SpreadsheetApp.flush();
     invalidateResults_(promptId);
     return ok_({ accepted: true, moderated: isBoard });
   } finally {

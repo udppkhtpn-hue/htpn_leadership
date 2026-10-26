@@ -242,8 +242,8 @@ export function Presenter() {
             <button type="button" onClick={restart}>Back to start</button>
           </div>
           <p className="console__label" style={{ marginTop: '0.75rem' }}>
-            → / PageDown / Space next · ← / PageUp back · 1–9 jump · B blackout · R reveal · F fullscreen · H
-            cursor
+            → / PageDown / Space next · ← / PageUp back · type a section number (1, or 1 then 2 for 12) ·
+            B blackout · R reveal · F fullscreen · H cursor
           </p>
         </section>
 

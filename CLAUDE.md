@@ -94,6 +94,10 @@ src/styles/              theme.css (tokens), global.css, presenter.css
   results, every 2.5 s, and only while a module is open. Measured on this
   deployment: 150 independent clients reading state in parallel all answer
   within 4.3 s (p50 2.2 s), with no failures.
+- **Every sheet write calls `SpreadsheetApp.flush()`,** and results cache for 4 s,
+  not 30 s. An append is not reliably visible to the next execution, so without
+  the flush a short-lived stale read gets cached as the truth and a vote appears
+  to vanish for the rest of the TTL.
 - **Apps Script serialises requests sharing one client session.** Any load test
   driven from a single browser tab queues behind itself and reports failures
   that will not happen in the room — use `npm run test:load` for real numbers.
