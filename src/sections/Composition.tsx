@@ -45,7 +45,7 @@ export function Composition({
   // The section's own photograph is the hero on an image screen; everywhere
   // else it can go in the margin alongside any extras.
   const extras = p.extras ?? []
-  const photos =
+  const photos: { src?: string; alt: string; plain?: boolean }[] =
     section.type === 'image'
       ? extras
       : [...(p.src && section.type !== 'video' ? [{ src: p.src, alt: p.alt ?? '' }] : []), ...extras]
@@ -57,14 +57,17 @@ export function Composition({
     delay += between(random, 0.12, 0.26)
   }
 
+  // A photo-led screen can carry bigger margin photographs; a type-led one
+  // keeps them small so they never compete with the hero.
+  const photoLed = section.type === 'image'
   photos.slice(0, density >= 3 ? 2 : density === 2 ? 1 : 0).forEach((photo, index) => {
     const left = index % 2 === 0
     add(
       `photo-${index}`,
       {
         position: 'absolute',
-        width: `${between(random, 13, 18).toFixed(1)}%`,
-        aspectRatio: left ? '4 / 3' : '3 / 4',
+        width: `${between(random, photoLed ? 19 : 14, photoLed ? 26 : 19).toFixed(1)}%`,
+        aspectRatio: photo.plain ? '3 / 4' : left ? '4 / 3' : '3 / 4',
         [left ? 'left' : 'right']: `${between(random, 2.5, 5).toFixed(1)}%`,
         top: `${between(random, 10, 58).toFixed(1)}%`,
       },
@@ -72,8 +75,8 @@ export function Composition({
         seed={`${section.id}:photo-${index}`}
         src={photo.src}
         alt={photo.alt}
-        halftone={density >= 3 && index === 0}
-        edge={left ? 'torn' : 'scissor'}
+        halftone={!photo.plain && density >= 3 && index === 0}
+        edge={photo.plain ? 'straight' : left ? 'torn' : 'scissor'}
         style={FILL}
       />,
     )

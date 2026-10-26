@@ -21,8 +21,13 @@ export const SECTIONS: Section[] = [
       'Say nothing for the first 15 seconds. Let the collage assemble.\n\nThen: this building opened in 1910. It is still open. Every one of us is passing through it.',
     props: {
       extras: [
-        { src: '/images/ward-corridor.jpg', alt: 'Ward corridor, 1970s' },
-        { src: '/images/old-equipment.jpg', alt: 'Equipment left in a side room' },
+        { src: '/images/ward-corridor.jpg', alt: 'An empty ward corridor, benches along one wall' },
+        {
+          // Arrives already torn, taped and mounted on cobalt: left uncut.
+          src: '/images/ward-corridor-collage.jpg',
+          alt: 'A torn print of a ward corridor, taped to a cobalt ground',
+          plain: true,
+        },
       ],
       src: '/images/kajang-hospital-1984.jpg',
       alt: 'Hospital Daerah Kajang, front view, photographed in 1984.',

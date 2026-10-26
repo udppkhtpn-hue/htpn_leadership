@@ -72,8 +72,12 @@ export interface SectionProps {
   stamp?: string
   /** A line drawing for this screen's margin, when one earns its place. */
   drawing?: 'hand' | 'stethoscope' | 'lamp' | 'window' | 'circle-of-figures'
-  /** Extra photographs for the collage, beyond the section's own `src`. */
-  extras?: { src?: string; alt: string }[]
+  /**
+   * Extra photographs for the collage, beyond the section's own `src`.
+   * `plain` marks an image that already arrives as a collage piece — torn,
+   * taped, on its own ground — so it is not cut out a second time.
+   */
+  extras?: { src?: string; alt: string; plain?: boolean }[]
   /** Pulled quote set as a newspaper clipping in the margin. */
   clipping?: { kicker?: string; headline?: string; body: string }
 }
