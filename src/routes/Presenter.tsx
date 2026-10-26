@@ -175,6 +175,14 @@ export function Presenter() {
   })()
 
   const moderate = async (note: PendingNote, status: 'approved' | 'hidden') => {
+    // A flagged note may name a colleague. One click should not put that on a
+    // screen in front of 150 people.
+    if (status === 'approved' && note.flagged) {
+      const ok = window.confirm(
+        `This note may name someone:\n\n"${note.text}"\n\nPut it on the projector?`,
+      )
+      if (!ok) return
+    }
     await send({ op: 'moderate', id: note.id, status, promptId })
     queue.refresh()
     results.refresh()
@@ -292,11 +300,28 @@ export function Presenter() {
                       aria-pressed={note.starred}
                       disabled={!note.starred && starsUsed(note.column) >= MAX_STARS}
                       onClick={() => star(note)}
+                      title={note.starred ? 'Unstar' : 'Star — enlarges it on screen'}
                       style={{ minHeight: '34px', padding: '0.3rem 0.6rem' }}
                     >
                       {note.starred ? '★' : '☆'}
                     </button>
-                    <span style={{ fontFamily: 'var(--font-body)', fontSize: '0.95rem' }}>{note.text}</span>
+                    <button
+                      type="button"
+                      onClick={() => moderate(note, 'hidden')}
+                      title="Take it off the projector"
+                      style={{ minHeight: '34px', padding: '0.3rem 0.6rem' }}
+                    >
+                      Hide
+                    </button>
+                    <span
+                      style={{
+                        fontFamily: 'var(--font-body)',
+                        fontSize: '0.95rem',
+                        color: note.flagged ? '#ff8a6b' : undefined,
+                      }}
+                    >
+                      {note.text}
+                    </span>
                   </li>
                 ))}
             </ul>
