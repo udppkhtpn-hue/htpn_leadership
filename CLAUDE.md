@@ -107,6 +107,14 @@ src/styles/              theme.css (tokens), global.css, presenter.css
 - **Respect `prefers-reduced-motion`,** plus the "Reduced effects" toggle on the
   console. 60 fps on an average office laptop driving a projector: pre-rendered
   textures, no per-frame SVG filters.
+- **Display type is sized against the length of its line** (`displaySize` in
+  `SectionScreen.tsx`), not by the viewport alone. A projector cannot scroll, so
+  a long headline at a fixed fluid size runs off the sheet.
+- **Never size a hero column in `ch`.** It resolves against the inherited 16px
+  body font, not the display face, so a column meant to be 1100px comes out at
+  180px and the headline wraps to shreds.
+- **Only the phone route loads eagerly.** Everything else is `lazy`, so `#/join`
+  never downloads Motion or the collage components (74 KB gzipped, not 148).
 - **No Tailwind utility soup for the collage.** Tokens and purpose-named classes;
   Tailwind is there for layout plumbing, not as the visual layer.
 - **No base64 images in source.** Media lives in `public/` and is referenced by
@@ -119,7 +127,10 @@ src/styles/              theme.css (tokens), global.css, presenter.css
 2. ✅ `#/styleguide` — every collage component, palette, type scale, each motion. Awaiting the check on the hospital projector.
 3. ✅ `/backend` Apps Script + `SETUP.md`. Deployed; the URL is in `src/config.ts`.
 4. ✅ Live modules wired to the backend, phone UIs, moderation queue, `#/test` and `npm run test:load`.
-5. Full content screens, `#/print`, service worker, `web-design-guidelines` audit, GitHub Pages deploy.
+5. ✅ Full content screens, `#/print`, service worker, `web-design-guidelines` audit. Deploy
+   workflow written; Pages not yet enabled and nothing pushed.
+
+Media and copy still outstanding: see `ASSETS.md`.
 
 ## Design tools
 

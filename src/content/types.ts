@@ -70,6 +70,12 @@ export interface SectionProps {
   events?: { year: string; text: string }[]
   /** stamp text, e.g. "WARD 7 · 1910" */
   stamp?: string
+  /** A line drawing for this screen's margin, when one earns its place. */
+  drawing?: 'hand' | 'stethoscope' | 'lamp' | 'window' | 'circle-of-figures'
+  /** Extra photographs for the collage, beyond the section's own `src`. */
+  extras?: { src?: string; alt: string }[]
+  /** Pulled quote set as a newspaper clipping in the margin. */
+  clipping?: { kicker?: string; headline?: string; body: string }
 }
 
 export type Section = SectionBase

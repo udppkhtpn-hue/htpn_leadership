@@ -4,6 +4,10 @@
    --------------------------------------------------------------------------- */
 
 .join {
+  /* No double-tap zoom delay on a phone, and a tap highlight we choose. */
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: color-mix(in srgb, var(--color-cobalt) 18%, transparent);
+  overscroll-behavior: contain;
   min-height: 100svh;
   background: var(--color-cream);
   color: var(--color-ink);
@@ -80,6 +84,7 @@ textarea.join__field {
   justify-self: end;
   font-family: var(--font-type);
   font-size: 0.75rem;
+  font-variant-numeric: tabular-nums;
   color: var(--color-sepia);
 }
 
@@ -153,6 +158,39 @@ textarea.join__field {
   font-family: var(--font-type);
   font-size: 0.85rem;
   color: var(--color-cobalt);
+}
+
+/* Pointer devices get a hover state; every state is more prominent than rest. */
+@media (hover: hover) {
+  .join__option:hover {
+    border-color: var(--color-cobalt);
+    background: color-mix(in srgb, var(--color-cobalt) 8%, #fff);
+  }
+
+  .join__submit:hover:not([disabled]) {
+    background: color-mix(in srgb, var(--color-cobalt) 86%, var(--color-ink));
+  }
+
+  .join__secondary:hover {
+    border-bottom-color: var(--color-cobalt);
+  }
+}
+
+.join__option:active,
+.join__submit:active:not([disabled]) {
+  transform: translateY(1px);
+}
+
+.join__option,
+.join__submit {
+  transition: background-color 0.15s ease, border-color 0.15s ease, transform 0.08s ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .join__option,
+  .join__submit {
+    transition: none;
+  }
 }
 
 /* --- Confirmation: the answer is pasted down onto the paper ---------------- */

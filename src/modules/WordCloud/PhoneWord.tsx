@@ -55,16 +55,21 @@ export function PhoneWord({
       </label>
       <input
         id="word"
+        name="word"
         className="join__field"
         type="text"
         value={text}
         maxLength={prompt.maxChars}
         autoComplete="off"
         autoCorrect="off"
+        spellCheck={false}
         enterKeyHint="send"
         onChange={(event) => setText(event.target.value)}
       />
-      <p className={remaining <= 5 ? 'join__count join__count--limit' : 'join__count'}>
+      <p
+        className={remaining <= 5 ? 'join__count join__count--limit' : 'join__count'}
+        aria-live="polite"
+      >
         {remaining} left
       </p>
       <button type="submit" className="join__submit" disabled={!text.trim() || busy}>

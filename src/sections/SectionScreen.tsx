@@ -1,37 +1,68 @@
+import type { CSSProperties } from 'react'
 import { config } from '../config'
 import type { Section } from '../content/types'
 import { QrCode } from './QrCode'
 import { LiveSection } from './LiveSection'
+import { Composition } from './Composition'
+import { VideoSection } from './VideoSection'
+import { Drop, InkBlot, PhotoCutout, SplitFlapNumber, Stamp, TapeStrip } from '../collage'
 
 /* ---------------------------------------------------------------------------
-   Phase 1 screens: correct type, scale, palette and one hero per section.
-   The collage layers (cutouts, tape, ink, clippings) arrive in Phase 2 and
-   sit behind .hero — never over it.
+   One hero per screen, in a column the collage never enters. Rotation stays
+   inside the brief's 3 degrees and contrast stays at full: everything else on
+   the poster is atmosphere.
    --------------------------------------------------------------------------- */
 
-function Stamp({ children }: { children: string }) {
-  return (
-    <p
-      className="m-0"
-      style={{
-        fontFamily: 'var(--font-type)',
-        fontSize: 'var(--text-stamp)',
-        letterSpacing: '0.18em',
-        color: 'color-mix(in srgb, var(--color-sepia) 85%, var(--color-ink))',
-      }}
-    >
-      {children}
-    </p>
-  )
+const HERO_WIDTH: Record<string, string> = {
+  'hero-center': 'min(72%, 68rem)',
+  'hero-left': 'min(66%, 62rem)',
+  'clipping-right': 'min(56%, 50rem)',
+  'full-bleed': 'min(76%, 74rem)',
+  board: 'min(96%, 82rem)',
+  split: 'min(74%, 62rem)',
 }
 
-function Display({ children, size = 'var(--text-hero)' }: { children: string; size?: string }) {
+/**
+ * Display type is sized against the length of the line, not just the viewport.
+ * A four-word statement should fill the sheet; a forty-word one still has to
+ * fit on it, and on a projector there is no scrolling to rescue an overflow.
+ */
+function displaySize(text: string): string {
+  const n = text.length
+  if (n <= 16) return 'var(--text-hero)'
+  if (n <= 30) return 'calc(var(--text-hero) * 0.8)'
+  if (n <= 52) return 'calc(var(--text-hero) * 0.6)'
+  if (n <= 88) return 'calc(var(--text-hero) * 0.46)'
+  return 'calc(var(--text-hero) * 0.36)'
+}
+
+function figureSize(value: string): string {
+  if (value.length <= 4) return 'var(--text-number)'
+  if (value.length <= 6) return 'calc(var(--text-number) * 0.78)'
+  return 'calc(var(--text-number) * 0.5)'
+}
+
+function stage(section: Section): CSSProperties {
+  const left = section.layout === 'hero-left' || section.layout === 'clipping-right'
+  return {
+    position: 'absolute',
+    inset: 0,
+    zIndex: 20,
+    display: 'grid',
+    placeContent: 'center',
+    justifyItems: left ? 'start' : 'center',
+    textAlign: left ? 'left' : 'center',
+    padding: 'clamp(2rem, 6vw, 7rem)',
+  }
+}
+
+function Display({ children, size }: { children: string; size?: string }) {
   return (
     <h1
-      className="m-0"
       style={{
+        margin: 0,
         fontFamily: 'var(--font-display)',
-        fontSize: size,
+        fontSize: size ?? displaySize(children),
         lineHeight: 0.92,
         letterSpacing: '-0.01em',
         color: 'var(--color-ink)',
@@ -46,13 +77,12 @@ function Display({ children, size = 'var(--text-hero)' }: { children: string; si
 function Lead({ children }: { children: string }) {
   return (
     <p
-      className="m-0"
       style={{
+        margin: 0,
         fontFamily: 'var(--font-serif)',
         fontSize: 'var(--text-lead)',
         lineHeight: 1.45,
-        maxWidth: '46ch',
-        color: 'color-mix(in srgb, var(--color-ink) 88%, var(--color-cream))',
+        color: 'color-mix(in srgb, var(--color-ink) 86%, var(--color-cream))',
       }}
     >
       {children}
@@ -60,182 +90,222 @@ function Lead({ children }: { children: string }) {
   )
 }
 
-const frame: React.CSSProperties = {
-  position: 'relative',
-  zIndex: 20,
-  height: '100%',
-  display: 'flex',
-  flexDirection: 'column',
-  gap: 'clamp(1rem, 2vw, 2rem)',
-  padding: 'clamp(2rem, 5vw, 6rem)',
-}
-
-export function SectionScreen({
-  section,
-  revealed,
-  enteredAt,
-  paused,
-}: {
+export interface SectionScreenProps {
   section: Section
   revealed: boolean
-  /** When this section came on screen, for the vote countdown. */
   enteredAt: number
-  /** Blackout or frozen: live modules stop polling. */
   paused: boolean
-}) {
-  const p = section.props
-  const alignment: React.CSSProperties =
-    section.layout === 'hero-left'
-      ? { justifyContent: 'center', alignItems: 'flex-start', textAlign: 'left' }
-      : { justifyContent: 'center', alignItems: 'center', textAlign: 'center' }
+}
 
-  switch (section.type) {
-    case 'actcard':
-      return (
-        <div style={{ ...frame, ...alignment }}>
-          <div className="hero">
+export function SectionScreen({ section, revealed, enteredAt, paused }: SectionScreenProps) {
+  const p = section.props
+  const heroStyle: CSSProperties = {
+    maxWidth: HERO_WIDTH[section.layout] ?? 'min(70%, 62rem)',
+    display: 'grid',
+    gap: 'clamp(0.75rem, 1.5vw, 1.5rem)',
+    justifyItems: 'inherit',
+  }
+
+  // Live modules own the whole sheet; the collage stays thin behind them.
+  if (section.type === 'wordcloud' || section.type === 'board' || section.type === 'vote') {
+    return (
+      <>
+        <Composition section={section} />
+        <div style={{ ...stage(section), padding: 'clamp(1rem, 3vw, 3rem)' }}>
+          <div className="hero" style={{ maxWidth: HERO_WIDTH.board, width: '100%' }}>
+            <LiveSection section={section} revealed={revealed} enteredAt={enteredAt} paused={paused} />
+          </div>
+        </div>
+      </>
+    )
+  }
+
+  if (section.type === 'actcard') {
+    return (
+      <>
+        <Composition section={section} />
+        <div style={stage(section)}>
+          <InkBlot
+            seed={`${section.id}:splash`}
+            size="min(46vw, 34rem)"
+            opacity={0.5}
+            style={{ left: '50%', top: '50%', translate: '-50% -50%', zIndex: 10 }}
+          />
+          <div className="hero" style={{ ...heroStyle, justifyItems: 'center' }}>
             <h1
-              className="m-0"
               style={{
+                margin: 0,
                 fontFamily: 'var(--font-display)',
-                fontSize: 'var(--text-number)',
+                fontSize: figureSize(p.headline ?? ''),
                 lineHeight: 0.82,
-                color: 'var(--color-cobalt)',
+                color: 'var(--color-ink)',
+                whiteSpace: 'nowrap',
               }}
             >
               {p.headline}
             </h1>
             <p
-              className="m-0"
               style={{
+                margin: 0,
                 fontFamily: 'var(--font-serif)',
                 fontStyle: 'italic',
                 fontSize: 'var(--text-title)',
-                color: 'var(--color-ink)',
               }}
             >
               {p.sub}
             </p>
           </div>
         </div>
-      )
+      </>
+    )
+  }
 
-    case 'statement':
-      return (
-        <div style={{ ...frame, ...alignment }}>
-          <div className="hero" style={{ display: 'grid', gap: '1.25rem' }}>
-            {p.stamp ? <Stamp>{p.stamp}</Stamp> : null}
-            {p.headline ? <Display>{p.headline}</Display> : null}
-            {p.quote ? (
-              <blockquote
-                className="m-0"
+  if (section.type === 'video') {
+    return (
+      <>
+        <Composition section={section} />
+        <VideoSection section={section} paused={paused} />
+      </>
+    )
+  }
+
+  if (section.type === 'image') {
+    const coldOpen = section.id === 'cold-open'
+    return (
+      <>
+        <Composition section={section} stretch={coldOpen ? 5 : 1} />
+        <div style={{ ...stage(section), padding: 'clamp(1.5rem, 4vw, 4rem)' }}>
+          <div className="hero" style={{ display: 'grid', gap: '1rem', justifyItems: 'center', maxWidth: '62%' }}>
+            <Drop seed={`${section.id}:hero-photo`} delay={coldOpen ? 13 : 0.35} rotate={-1.5}>
+              <PhotoCutout
+                seed={`${section.id}:hero`}
+                morphId={section.morphId}
+                src={p.src}
+                alt={p.alt ?? section.title}
+                edge="torn"
+                halftone={section.act === 1}
+                idle={false}
+                style={{ width: '100%', aspectRatio: '3 / 2' }}
+              />
+            </Drop>
+            {p.stamp ? <Stamp seed={section.id}>{p.stamp}</Stamp> : null}
+            {p.caption ? <Display size="var(--text-statement)">{p.caption}</Display> : null}
+          </div>
+        </div>
+      </>
+    )
+  }
+
+  if (section.type === 'data') {
+    return (
+      <>
+        <Composition section={section} />
+        <div style={stage(section)}>
+          <Drop seed={`${section.id}:figure`} delay={0.3} rotate={-1.2}>
+            <div
+              className="hero"
+              style={{
+                background: 'color-mix(in srgb, var(--color-sepia-light) 32%, #fff)',
+                padding: 'clamp(1.25rem, 3vw, 2.75rem)',
+                boxShadow: '0.35rem 0.4rem 0 color-mix(in srgb, var(--color-ink) 18%, transparent)',
+                display: 'grid',
+                gap: '0.5rem',
+                justifyItems: 'start',
+                textAlign: 'left',
+                maxWidth: 'min(62vw, 44rem)',
+              }}
+            >
+              <div style={{ height: 2, width: '100%', background: 'var(--color-ink)' }} />
+              <p
                 style={{
-                  fontFamily: 'var(--font-serif)',
-                  fontSize: 'var(--text-statement)',
-                  lineHeight: 1.1,
-                  color: 'var(--color-ink)',
+                  margin: 0,
+                  fontFamily: 'var(--font-display)',
+                  fontSize: figureSize(p.value ?? ''),
+                  lineHeight: 0.8,
+                  color: 'var(--color-cobalt)',
+                  whiteSpace: 'nowrap',
                 }}
               >
-                {p.quote}
-              </blockquote>
-            ) : null}
-            {p.attribution ? <Stamp>{p.attribution}</Stamp> : null}
-            {p.sub ? <Lead>{p.sub}</Lead> : null}
-          </div>
+                <SplitFlapNumber value={p.value ?? ''} delay={0.5} />
+                {p.unit ? <span style={{ fontSize: '0.4em' }}>{p.unit}</span> : null}
+              </p>
+              <p
+                style={{
+                  margin: 0,
+                  fontFamily: 'var(--font-body)',
+                  fontSize: 'var(--text-title)',
+                  lineHeight: 1.25,
+                }}
+              >
+                {p.label}
+              </p>
+              {p.source ? <Stamp seed={`${section.id}:source`}>{p.source}</Stamp> : null}
+            </div>
+          </Drop>
         </div>
-      )
+      </>
+    )
+  }
 
-    case 'data':
-      return (
-        <div style={{ ...frame, justifyContent: 'center', alignItems: 'flex-start' }}>
-          <div className="hero" style={{ display: 'grid', gap: '0.5rem' }}>
-            <p
-              className="m-0"
-              style={{
-                fontFamily: 'var(--font-display)',
-                fontSize: 'var(--text-number)',
-                lineHeight: 0.8,
-                color: 'var(--color-cobalt)',
-              }}
-            >
-              {p.value}
-              {p.unit ? <span style={{ fontSize: '0.4em' }}>{p.unit}</span> : null}
-            </p>
-            <p
-              className="m-0"
-              style={{
-                fontFamily: 'var(--font-body)',
-                fontSize: 'var(--text-title)',
-                lineHeight: 1.25,
-                maxWidth: '34ch',
-              }}
-            >
-              {p.label}
-            </p>
-            {p.source ? <Stamp>{p.source}</Stamp> : null}
-          </div>
-        </div>
-      )
-
-    case 'image':
-      return (
-        <div style={{ ...frame, justifyContent: 'flex-end', alignItems: 'flex-start' }}>
-          <div className="hero" style={{ display: 'grid', gap: '0.75rem' }}>
-            {p.stamp ? <Stamp>{p.stamp}</Stamp> : null}
-            {p.caption ? <Display size="var(--text-statement)">{p.caption}</Display> : null}
-            <Stamp>{`image: ${p.src ?? 'missing'}`}</Stamp>
-          </div>
-        </div>
-      )
-
-    case 'video':
-      return (
-        <div style={{ ...frame, justifyContent: 'flex-end', alignItems: 'flex-start' }}>
-          <div className="hero" style={{ display: 'grid', gap: '0.75rem' }}>
-            <Display size="var(--text-statement)">{section.title}</Display>
-            <Stamp>{`video: ${p.src ?? 'missing'} — plays on enter from Phase 5`}</Stamp>
-          </div>
-        </div>
-      )
-
-    case 'timeline':
-      return (
-        <div style={{ ...frame, justifyContent: 'center' }}>
-          <ol className="hero m-0" style={{ listStyle: 'none', padding: 0, display: 'grid', gap: '1.25rem' }}>
-            {(p.events ?? []).map((event) => (
-              <li key={event.year} style={{ display: 'flex', gap: '1.5rem', alignItems: 'baseline' }}>
+  if (section.type === 'timeline') {
+    return (
+      <>
+        <Composition section={section} />
+        <div style={{ ...stage(section), justifyItems: 'center' }}>
+          <ol
+            className="hero"
+            style={{
+              listStyle: 'none',
+              margin: 0,
+              padding: 0,
+              display: 'grid',
+              gap: 'clamp(0.75rem, 1.8vw, 1.5rem)',
+              maxWidth: 'min(80%, 54rem)',
+              textAlign: 'left',
+            }}
+          >
+            {(p.events ?? []).map((event, index) => (
+              <li key={event.year} style={{ display: 'flex', gap: 'clamp(1rem, 2.5vw, 2rem)', alignItems: 'baseline' }}>
                 <span
                   style={{
                     fontFamily: 'var(--font-type)',
                     fontSize: 'var(--text-title)',
                     color: 'var(--color-cobalt)',
-                    minWidth: '6ch',
+                    minWidth: '5.5ch',
                   }}
                 >
                   {event.year}
                 </span>
-                <span style={{ fontFamily: 'var(--font-body)', fontSize: 'var(--text-lead)' }}>
+                <span style={{ fontFamily: 'var(--font-body)', fontSize: 'var(--text-lead)', lineHeight: 1.35 }}>
                   {event.text}
                 </span>
+                {index === 0 ? null : null}
               </li>
             ))}
           </ol>
         </div>
-      )
+      </>
+    )
+  }
 
-    case 'qr':
-      return (
-        <div style={{ ...frame, ...alignment }}>
-          <div className="hero" style={{ display: 'grid', gap: '1.5rem', justifyItems: 'center' }}>
+  if (section.type === 'qr') {
+    return (
+      <>
+        <Composition section={section} />
+        <div style={stage(section)}>
+          <div className="hero" style={{ ...heroStyle, justifyItems: 'center', maxWidth: 'min(70%, 40rem)' }}>
             {p.headline ? <Display size="var(--text-statement)">{p.headline}</Display> : null}
-            <QrCode value={config.joinUrl} />
+            <div style={{ position: 'relative', padding: '1rem', background: '#fff' }}>
+              <TapeStrip seed={`${section.id}:qr-tape`} length="6rem" style={{ top: '-1rem', left: '20%' }} />
+              <QrCode value={config.joinUrl} size={360} />
+            </div>
             <p
-              className="m-0"
               style={{
+                margin: 0,
                 fontFamily: 'var(--font-type)',
                 fontSize: 'var(--text-title)',
-                letterSpacing: '0.04em',
                 color: 'var(--color-cobalt)',
+                whiteSpace: 'nowrap',
               }}
             >
               {config.joinUrlShort}
@@ -243,29 +313,54 @@ export function SectionScreen({
             {p.sub ? <Lead>{p.sub}</Lead> : null}
           </div>
         </div>
-      )
+      </>
+    )
+  }
 
-    case 'wordcloud':
-    case 'board':
-    case 'vote':
-      return (
-        <div style={{ ...frame, justifyContent: 'center', alignItems: 'center' }}>
-          <LiveSection
-            section={section}
-            revealed={revealed}
-            enteredAt={enteredAt}
-            paused={paused}
+  if (section.type === 'close') {
+    return (
+      <>
+        <div className="collage-layer" aria-hidden="true">
+          <InkBlot
+            seed={`${section.id}:final`}
+            size="min(30vw, 22rem)"
+            opacity={0.55}
+            style={{ left: '12%', bottom: '14%' }}
           />
         </div>
-      )
-
-    case 'close':
-      return (
-        <div style={{ ...frame, ...alignment }}>
-          <div className="hero">
+        <div style={stage(section)}>
+          <div className="hero" style={{ ...heroStyle, maxWidth: 'min(74%, 56rem)' }}>
             <Display>{p.headline ?? 'Be the senior you needed.'}</Display>
           </div>
         </div>
-      )
+      </>
+    )
   }
+
+  // statement, and anything else that is one line of type on paper
+  return (
+    <>
+      <Composition section={section} />
+      <div style={stage(section)}>
+        <div className="hero" style={heroStyle}>
+          {p.stamp ? <Stamp seed={section.id}>{p.stamp}</Stamp> : null}
+          {p.headline ? <Display>{p.headline}</Display> : null}
+          {p.quote ? (
+            <blockquote
+              style={{
+                margin: 0,
+                fontFamily: 'var(--font-serif)',
+                fontSize: `calc(${displaySize(p.quote)} * 0.82)`,
+                lineHeight: 1.12,
+              }}
+            >
+              {p.quote}
+            </blockquote>
+          ) : null}
+          {p.attribution ? <Stamp seed={`${section.id}:attr`}>{p.attribution}</Stamp> : null}
+          {p.sub ? <Lead>{p.sub}</Lead> : null}
+        </div>
+      </div>
+    </>
+  )
 }

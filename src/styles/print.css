@@ -1,0 +1,94 @@
+/* ---------------------------------------------------------------------------
+   #/print — the paper backup. If the laptop dies, this PDF and a stack of
+   A/B/C/D cards are the talk. No collage, no colour dependence: it has to read
+   when printed in black and white on a ward printer.
+   --------------------------------------------------------------------------- */
+
+.print {
+  background: #fff;
+  color: #000;
+  font-family: var(--font-body);
+}
+
+.print__intro {
+  padding: 2rem;
+  border-bottom: 2px solid #000;
+}
+
+.print__sheet {
+  padding: 2rem;
+  border-bottom: 1px dashed #999;
+  min-height: 60vh;
+  display: grid;
+  align-content: start;
+  gap: 1rem;
+}
+
+.print__meta {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+}
+
+.print__hero {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 2.6rem;
+  line-height: 1;
+}
+
+.print__figure {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 4rem;
+  line-height: 0.9;
+}
+
+.print__body {
+  margin: 0;
+  font-size: 1.05rem;
+  line-height: 1.5;
+  max-width: 68ch;
+}
+
+.print__options {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 0.5rem;
+  max-width: 68ch;
+}
+
+.print__option-key {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  margin-right: 0.6rem;
+}
+
+.print__notes {
+  margin: 0;
+  padding-top: 0.75rem;
+  border-top: 1px solid #000;
+  font-size: 0.85rem;
+  line-height: 1.5;
+  white-space: pre-wrap;
+  max-width: 68ch;
+}
+
+.print__hint {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+}
+
+@media print {
+  .print__hide { display: none; }
+  .print__sheet {
+    border-bottom: 0;
+    break-after: page;
+    min-height: auto;
+  }
+  .print__sheet:last-child { break-after: auto; }
+  @page { margin: 14mm; }
+}

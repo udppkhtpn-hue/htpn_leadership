@@ -20,6 +20,10 @@ export const SECTIONS: Section[] = [
     notes:
       'Say nothing for the first 15 seconds. Let the collage assemble.\n\nThen: this building opened in 1910. It is still open. Every one of us is passing through it.',
     props: {
+      extras: [
+        { src: '/images/ward-corridor.jpg', alt: 'Ward corridor, 1970s' },
+        { src: '/images/old-equipment.jpg', alt: 'Equipment left in a side room' },
+      ],
       src: '/images/1910-building.jpg',
       alt: 'The 1910 hospital building at HTPN, photographed from the courtyard.',
       stamp: 'HTPN · 1910',
@@ -35,6 +39,7 @@ export const SECTIONS: Section[] = [
     minutes: 1,
     notes: 'Read the title out loud, slowly. Then: this is not a talk about promotion.',
     props: {
+      drawing: 'window',
       headline: 'Be the senior you needed.',
       sub: 'Leadership is a choice, not a rank.',
       stamp: 'HTPN · Kajang',
@@ -50,6 +55,7 @@ export const SECTIONS: Section[] = [
     notes:
       'Everyone takes out a phone now, not later. Say it plainly: anonymous, no names, I cannot see who wrote what.',
     props: {
+      drawing: 'hand',
       headline: 'Take out your phone.',
       sub: 'Anonymous. No names, no login.',
     },
@@ -88,6 +94,13 @@ export const SECTIONS: Section[] = [
     notes:
       'The HO who answered a call at 3am for a patient who was not theirs led. Nobody gave them a title for it.',
     props: {
+      drawing: 'hand',
+      extras: [{ src: '/images/hands-handover.jpg', alt: 'Two pairs of hands at a handover' }],
+      clipping: {
+        kicker: 'Night shift',
+        headline: 'Nobody wrote it down',
+        body: 'The call came at three. Somebody answered it who did not have to, reviewed a patient who was not theirs, and went back to bed. No form records this. No appraisal counts it.',
+      },
       headline: 'You have already led today. You just did not call it that.',
     },
   },
@@ -100,6 +113,12 @@ export const SECTIONS: Section[] = [
     minutes: 2,
     notes: 'Give the number, then be quiet for three seconds.',
     props: {
+      drawing: 'stethoscope',
+      clipping: {
+        kicker: 'TODO_WRITE',
+        headline: 'TODO_WRITE',
+        body: 'TODO_WRITE - the two or three sentences of context that sit beside this number.',
+      },
       value: 'TODO_WRITE',
       unit: '%',
       label: 'TODO_WRITE — what this number measures, in one short line.',
@@ -140,6 +159,8 @@ export const SECTIONS: Section[] = [
     minutes: 2,
     notes: 'This closes Act I. The room should be uncomfortable here.',
     props: {
+      drawing: 'lamp',
+      extras: [{ src: '/images/night-window.jpg', alt: 'A lit ward window at night' }],
       quote: 'TODO_WRITE — the sentence that names what bad seniority costs a patient.',
       attribution: 'TODO_WRITE',
     },
@@ -178,6 +199,11 @@ export const SECTIONS: Section[] = [
     notes:
       'Goleman, Leadership That Gets Results, HBR 2000. Authoritative +.54 is the strongest single style.',
     props: {
+      clipping: {
+        kicker: 'Harvard Business Review, 2000',
+        headline: 'Six styles, one climate',
+        body: 'Goleman measured six leadership styles against the working climate they produced. Four lifted it. Two pulled it down. The strongest, authoritative, moves people by making the destination clear.',
+      },
       value: '+.54',
       label: 'Authoritative leadership, correlation with working climate.',
       source: 'Goleman, "Leadership That Gets Results", Harvard Business Review, 2000.',
@@ -217,7 +243,8 @@ export const SECTIONS: Section[] = [
     module: { kind: 'wordcloud', promptId: 'wc-admire' },
     notes:
       'Nobody writes "clever". It is always patience, calm, took responsibility. Say that out loud when the cloud settles.',
-    props: {},
+    props: {
+      drawing: 'circle-of-figures',},
   },
   {
     id: 'micro-acts',
@@ -228,6 +255,7 @@ export const SECTIONS: Section[] = [
     minutes: 2.5,
     notes: 'Name three concrete things an MO can do on the next shift. Keep them small.',
     props: {
+      drawing: 'stethoscope',
       headline: 'The smallest unit of leadership is one handover done properly.',
     },
   },
@@ -240,6 +268,7 @@ export const SECTIONS: Section[] = [
     minutes: 3,
     notes: 'Walk it hour by hour. This is the practical core of the talk.',
     props: {
+      drawing: 'lamp',
       events: [
         { year: '07:00', text: 'TODO_WRITE — handover.' },
         { year: '11:00', text: 'TODO_WRITE — the HO who is drowning.' },
@@ -270,6 +299,7 @@ export const SECTIONS: Section[] = [
     morphId: 'building-1910',
     notes: 'Same photograph as the cold open. Say: this room has had this conversation before.',
     props: {
+      drawing: 'window',
       src: '/images/1910-building.jpg',
       alt: 'The 1910 hospital building at HTPN.',
       stamp: 'HTPN · 1910',
@@ -284,6 +314,7 @@ export const SECTIONS: Section[] = [
     minutes: 2,
     notes: 'The hospital was here before you and will be here after you. The only question is what you leave in it.',
     props: {
+      drawing: 'window',
       value: '1889',
       label: 'The year this hospital opened.',
       source: 'Ministry of Health Malaysia.',
@@ -310,6 +341,7 @@ export const SECTIONS: Section[] = [
     notes:
       'Paper cards go out now. Nothing is collected and nothing is typed. They keep the card.',
     props: {
+      drawing: 'circle-of-figures',
       headline: 'This month I will be the senior I needed by…',
       sub: 'Write it on the card. Keep it where you can see it.',
     },

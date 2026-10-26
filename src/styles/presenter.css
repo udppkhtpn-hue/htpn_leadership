@@ -1,5 +1,8 @@
 /* The presenter console: functional, dark, no collage. */
 .console {
+  /* Native selects, inputs and scrollbars follow the dark surface. */
+  color-scheme: dark;
+  touch-action: manipulation;
   height: 100%;
   overflow: auto;
   background: var(--color-console);
@@ -37,6 +40,8 @@
   display: flex;
   gap: 1.5rem;
   font-size: clamp(1.5rem, 3vw, 2.25rem);
+  /* The clocks must not jitter as the digits change. */
+  font-variant-numeric: tabular-nums;
 }
 
 .console__notes {
@@ -64,6 +69,13 @@
   padding: 0.6rem 0.9rem;
   min-height: 44px;
   cursor: pointer;
+}
+
+@media (hover: hover) {
+  .console button:hover {
+    background: color-mix(in srgb, var(--color-cream) 18%, transparent);
+    border-color: color-mix(in srgb, var(--color-cream) 45%, transparent);
+  }
 }
 
 .console button[aria-pressed='true'] {

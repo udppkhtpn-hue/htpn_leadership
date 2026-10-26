@@ -37,7 +37,7 @@ export const SCENARIOS: Scenario[] = [
       },
       {
         key: 'C',
-        text: 'Once the patient is safe, take him aside: "What happened? What got in the way? What do we change?"',
+        text: 'Once the patient is safe, take him aside: \u201cWhat happened? What got in the way? What do we change?\u201d',
         style: 'coaching',
       },
       {

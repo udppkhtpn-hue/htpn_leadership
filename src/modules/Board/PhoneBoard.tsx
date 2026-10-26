@@ -45,13 +45,18 @@ export function PhoneBoard({
       </label>
       <textarea
         id="note"
+        name="note"
         className="join__field"
         value={text}
         maxLength={prompt.maxChars}
+        autoComplete="off"
         rows={3}
         onChange={(event) => setText(event.target.value)}
       />
-      <p className={remaining <= 10 ? 'join__count join__count--limit' : 'join__count'}>
+      <p
+        className={remaining <= 10 ? 'join__count join__count--limit' : 'join__count'}
+        aria-live="polite"
+      >
         {remaining} left
       </p>
       <button type="submit" className="join__submit" disabled={!column || !text.trim() || busy}>
