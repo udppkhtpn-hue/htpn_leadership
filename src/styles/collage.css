@@ -1,0 +1,251 @@
+/* ---------------------------------------------------------------------------
+   Collage layers. Everything here is atmosphere: it sits behind .hero, at
+   reduced contrast, and never covers it. Idle motion animates transform and
+   opacity only, so the projector laptop stays at 60fps.
+   --------------------------------------------------------------------------- */
+
+/* --- Paper ---------------------------------------------------------------- */
+
+.grain {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: url('/textures/paper-grain.svg');
+  background-size: 420px 420px;
+  mix-blend-mode: multiply;
+  opacity: 0.4;
+}
+
+.grain--fibre {
+  background-image: url('/textures/paper-fibre.svg');
+  background-size: 600px 600px;
+  opacity: 0.5;
+}
+
+/* --- Photographs ---------------------------------------------------------- */
+
+.cutout {
+  position: relative;
+  overflow: hidden;
+  background: var(--color-sepia-light);
+  box-shadow: 0.35rem 0.4rem 0 color-mix(in srgb, var(--color-ink) 22%, transparent);
+}
+
+.cutout__img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(1) contrast(1.05) sepia(0.45);
+}
+
+.cutout--grayscale .cutout__img { filter: grayscale(1) contrast(1.1); }
+
+.cutout__halftone {
+  position: absolute;
+  inset: 0;
+  background-image: url('/textures/halftone.svg');
+  background-size: 6px 6px;
+  mix-blend-mode: multiply;
+  opacity: 0.35;
+  pointer-events: none;
+}
+
+/* Placeholder until the archival photographs arrive. */
+.cutout__missing {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-content: center;
+  gap: 0.35rem;
+  text-align: center;
+  padding: 1rem;
+  background:
+    linear-gradient(
+      142deg,
+      color-mix(in srgb, var(--color-sepia) 70%, var(--color-cream)),
+      color-mix(in srgb, var(--color-sepia-light) 85%, var(--color-cream))
+    );
+  color: color-mix(in srgb, var(--color-ink) 70%, var(--color-cream));
+  font-family: var(--font-type);
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+}
+
+/* --- Newspaper clipping --------------------------------------------------- */
+
+.clipping {
+  position: relative;
+  background: color-mix(in srgb, var(--color-sepia-light) 38%, #fff);
+  color: var(--color-ink);
+  padding: 1rem 1.1rem 1.2rem;
+  box-shadow: 0.3rem 0.35rem 0 color-mix(in srgb, var(--color-ink) 18%, transparent);
+}
+
+.clipping__rule {
+  height: 2px;
+  background: var(--color-ink);
+  margin: 0 0 0.6rem;
+}
+
+.clipping__kicker {
+  margin: 0 0 0.35rem;
+  font-family: var(--font-type);
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  color: color-mix(in srgb, var(--color-sepia) 90%, var(--color-ink));
+}
+
+.clipping__head {
+  margin: 0 0 0.5rem;
+  font-family: var(--font-serif);
+  font-weight: 700;
+  font-size: 1.35rem;
+  line-height: 1.1;
+}
+
+.clipping__body {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  line-height: 1.5;
+  columns: 2;
+  column-gap: 0.9rem;
+  column-rule: 1px solid color-mix(in srgb, var(--color-sepia) 35%, transparent);
+  text-align: justify;
+  hyphens: auto;
+}
+
+.clipping--single .clipping__body { columns: 1; }
+
+/* --- Masking tape --------------------------------------------------------- */
+
+.tape {
+  position: absolute;
+  height: 2.2rem;
+  background:
+    linear-gradient(
+      100deg,
+      color-mix(in srgb, var(--color-sepia-light) 55%, transparent),
+      color-mix(in srgb, var(--color-sepia-light) 78%, transparent) 42%,
+      color-mix(in srgb, var(--color-cream) 70%, transparent)
+    );
+  box-shadow: 0 0.25rem 0.5rem -0.2rem color-mix(in srgb, var(--color-ink) 45%, transparent);
+  opacity: 0.82;
+  transform-origin: center;
+  pointer-events: none;
+}
+
+.tape::before,
+.tape::after {
+  /* Frayed short ends. */
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 0.5rem;
+  background: inherit;
+  clip-path: polygon(0 0, 100% 6%, 60% 34%, 100% 58%, 55% 78%, 100% 100%, 0 100%);
+}
+
+.tape::before { left: -0.45rem; }
+.tape::after { right: -0.45rem; transform: scaleX(-1); }
+
+/* --- Ink ------------------------------------------------------------------ */
+
+.blot {
+  position: absolute;
+  pointer-events: none;
+  mix-blend-mode: multiply;
+  color: var(--color-cobalt);
+}
+
+.blot svg { display: block; width: 100%; height: 100%; }
+
+/* --- Line drawings -------------------------------------------------------- */
+
+.line-drawing {
+  position: absolute;
+  pointer-events: none;
+  color: var(--color-ink);
+}
+
+.line-drawing svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+}
+
+/* --- Stamps --------------------------------------------------------------- */
+
+.stamp {
+  display: inline-block;
+  font-family: var(--font-type);
+  font-size: var(--text-stamp);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--color-sepia) 88%, var(--color-ink));
+}
+
+.stamp--rubber {
+  border: 2px solid currentColor;
+  color: var(--color-cobalt);
+  padding: 0.3rem 0.6rem;
+  opacity: 0.78;
+  border-radius: 2px;
+}
+
+/* --- The torn sheet live results are pinned to ---------------------------- */
+
+.torn-sheet {
+  position: relative;
+  background: color-mix(in srgb, #fff 62%, var(--color-cream));
+  padding: clamp(1.25rem, 3.5vw, 3rem);
+  box-shadow: 0 1.75rem 3.5rem -1.25rem color-mix(in srgb, var(--color-ink) 45%, transparent);
+}
+
+/* --- Idle motion ---------------------------------------------------------- */
+
+@keyframes drift {
+  0%, 100% { transform: translate3d(0, 0, 0); }
+  50% { transform: translate3d(var(--drift-x, 6px), var(--drift-y, -5px), 0); }
+}
+
+@keyframes tape-lift {
+  0%, 100% { transform: rotate(var(--tape-rotate, 0deg)) translateY(0) scaleY(1); }
+  50% { transform: rotate(var(--tape-rotate, 0deg)) translateY(-1.5px) scaleY(0.985); }
+}
+
+@keyframes bleed {
+  0%, 100% { transform: scale(1); opacity: var(--blot-opacity, 0.5); }
+  50% { transform: scale(1.025); opacity: calc(var(--blot-opacity, 0.5) + 0.06); }
+}
+
+.idle-drift { animation: drift var(--idle-duration, 18s) ease-in-out infinite; }
+.idle-tape { animation: tape-lift var(--idle-duration, 9s) ease-in-out infinite; }
+.idle-bleed { animation: bleed var(--idle-duration, 14s) ease-in-out infinite; }
+
+/* The hero never moves, whatever is animating around it. */
+.hero .idle-drift,
+.hero .idle-tape,
+.hero .idle-bleed {
+  animation: none;
+}
+
+[data-reduced-effects='true'] .idle-drift,
+[data-reduced-effects='true'] .idle-tape,
+[data-reduced-effects='true'] .idle-bleed {
+  animation: none;
+}
+
+[data-idle='false'] .idle-drift,
+[data-idle='false'] .idle-tape,
+[data-idle='false'] .idle-bleed {
+  animation: none;
+}

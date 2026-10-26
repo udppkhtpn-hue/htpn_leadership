@@ -4,14 +4,14 @@ import { Present } from './routes/Present'
 import { Presenter } from './routes/Presenter'
 import { Join } from './routes/Join'
 import { Placeholder } from './routes/Placeholder'
+import { Styleguide } from './routes/Styleguide'
 
 export default function App() {
   const route = useRoute()
 
   // Phones never need presentation state, and the index page is just links.
   if (route === 'join') return <Join />
-  if (route === 'styleguide')
-    return <Placeholder title="Styleguide" detail="Every collage component, the palette, the type scale and each motion. Built in Phase 2." />
+  if (route === 'styleguide') return <Styleguide />
   if (route === 'test')
     return <Placeholder title="Load test" detail="150 simulated phones submitting at realistic rates. Built in Phase 4." />
   if (route === 'print')

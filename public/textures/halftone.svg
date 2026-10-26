@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="6" height="6" viewBox="0 0 6 6">
+  <!-- Newsprint halftone dot, tiled over sepia photographs. -->
+  <rect width="6" height="6" fill="none"/>
+  <circle cx="1.5" cy="1.5" r="1.15" fill="#141210"/>
+  <circle cx="4.5" cy="4.5" r="1.15" fill="#141210"/>
+</svg>

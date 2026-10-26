@@ -98,7 +98,7 @@ src/styles/              theme.css (tokens), global.css, presenter.css
 ## Build phases
 
 1. ✅ Scaffold, routing, BroadcastChannel sync, presenter controls, placeholder sections.
-2. `#/styleguide` — every collage component, palette, type scale, each motion. Checked on the hospital projector.
+2. ✅ `#/styleguide` — every collage component, palette, type scale, each motion. Awaiting the check on the hospital projector.
 3. `/backend` Apps Script + `SETUP.md`. Deployed by hand; URL goes in `src/config.ts`.
 4. Live modules wired to the backend, then `#/test` with 150 simulated phones.
 5. Full content screens, `#/print`, service worker, `web-design-guidelines` audit, GitHub Pages deploy.

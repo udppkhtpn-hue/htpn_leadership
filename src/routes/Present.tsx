@@ -2,6 +2,8 @@ import { useCallback, useEffect } from 'react'
 import { usePresentation } from '../state/PresentationProvider'
 import { toggleFullscreen, usePresentationKeys } from '../lib/keys'
 import { SectionScreen } from '../sections/SectionScreen'
+import { EffectsProvider, PaperGrain, Sheet } from '../collage'
+import '../styles/collage.css'
 
 /** The projector screen. No chrome, ever. */
 export function Present() {
@@ -22,16 +24,18 @@ export function Present() {
     document.body.classList.toggle('cursor-hidden', state.hideCursor)
   }, [state.hideCursor])
 
+  const density = section.density ?? (section.act === 1 ? 3 : section.act === 2 ? 2 : 1)
+
   return (
-    <main
-      className="poster"
-      data-act={section.act}
-      data-density={section.density ?? (section.act === 1 ? 3 : section.act === 2 ? 2 : 1)}
-      aria-live="polite"
-    >
-      <div className="poster-creases" aria-hidden="true" />
-      <SectionScreen section={section} revealed={state.revealed} />
-      {state.blackout ? <div className="blackout" aria-hidden="true" /> : null}
-    </main>
+    <EffectsProvider reduced={state.reducedEffects}>
+      <main className="poster" data-act={section.act} data-density={density} aria-live="polite">
+        <div className="poster-creases" aria-hidden="true" />
+        <PaperGrain density={density} />
+        <Sheet sheetKey={section.id}>
+          <SectionScreen section={section} revealed={state.revealed} />
+        </Sheet>
+        {state.blackout ? <div className="blackout" aria-hidden="true" /> : null}
+      </main>
+    </EffectsProvider>
   )
 }
