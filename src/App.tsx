@@ -5,6 +5,7 @@ import { Presenter } from './routes/Presenter'
 import { Join } from './routes/Join'
 import { Placeholder } from './routes/Placeholder'
 import { Styleguide } from './routes/Styleguide'
+import { Test } from './routes/Test'
 
 export default function App() {
   const route = useRoute()
@@ -12,8 +13,7 @@ export default function App() {
   // Phones never need presentation state, and the index page is just links.
   if (route === 'join') return <Join />
   if (route === 'styleguide') return <Styleguide />
-  if (route === 'test')
-    return <Placeholder title="Load test" detail="150 simulated phones submitting at realistic rates. Built in Phase 4." />
+  if (route === 'test') return <Test />
   if (route === 'print')
     return <Placeholder title="Print" detail="A print-friendly version of the static sections, for the backup PDF. Built in Phase 5." />
   if (route === 'home')

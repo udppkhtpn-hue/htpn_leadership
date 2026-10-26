@@ -4,8 +4,9 @@
  * backend and is never bundled here.
  */
 export const config = {
-  /** Paste the Apps Script web app /exec URL here after Phase 3. */
-  backendUrl: '',
+  /** Apps Script web app. Public by design; the PIN is not in here. */
+  backendUrl:
+    'https://script.google.com/macros/s/AKfycbwwSilczIDZ8AXOJ-TIAB909lkA6Ye3EcbHdYFcb2e0D_KaVDEO63LU5DQRDDkqnLd8/exec',
   /** Public URL the audience QR code points at. */
   joinUrl: 'https://udppkhtpn-hue.github.io/htpn_leadership/#/join',
   /** Shown under the QR code so people can type it. */

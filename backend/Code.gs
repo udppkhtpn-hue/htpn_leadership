@@ -311,6 +311,38 @@ function buildVoteResults_(scenarioId) {
   return { counts: counts, total: total };
 }
 
+/** Every note for one prompt, for the presenter's moderation queue. */
+function pendingNotes_(promptId) {
+  var idId = colIndex_(TAB.responses, 'id');
+  var idTs = colIndex_(TAB.responses, 'ts');
+  var idText = colIndex_(TAB.responses, 'text');
+  var idPrompt = colIndex_(TAB.responses, 'promptId');
+  var idColumn = colIndex_(TAB.responses, 'column');
+  var idStatus = colIndex_(TAB.responses, 'status');
+  var idStarred = colIndex_(TAB.responses, 'starred');
+  var idFlagged = colIndex_(TAB.responses, 'flagged');
+
+  var notes = [];
+  rows_(TAB.responses).forEach(function (row) {
+    if (String(row[idPrompt]) !== promptId) return;
+    notes.push({
+      id: String(row[idId]),
+      ts: row[idTs] ? new Date(row[idTs]).getTime() : 0,
+      text: String(row[idText]),
+      column: String(row[idColumn]),
+      status: String(row[idStatus]),
+      starred: row[idStarred] === true || String(row[idStarred]) === 'TRUE',
+      flagged: row[idFlagged] === true || String(row[idFlagged]) === 'TRUE',
+    });
+  });
+
+  // Newest first: the queue is worked from the top during the talk.
+  notes.sort(function (a, b) {
+    return b.ts - a.ts;
+  });
+  return notes.slice(0, LIMITS.maxNotes);
+}
+
 function getResults_(promptId, kind) {
   if (!promptId) return null;
   var key = 'results:' + kind + ':' + promptId;
@@ -572,6 +604,13 @@ function doGet(e) {
           revealed: state.revealed,
           results: getResults_(promptId, kind),
         });
+      }
+
+      case 'pending': {
+        if (!checkPin_(params.pin)) return fail_('bad pin');
+        var promptForQueue = params.promptId || getState_().promptId;
+        if (!promptForQueue) return ok_({ notes: [] });
+        return ok_({ notes: pendingNotes_(promptForQueue) });
       }
 
       case 'export':

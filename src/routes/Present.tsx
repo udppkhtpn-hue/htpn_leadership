@@ -32,7 +32,12 @@ export function Present() {
         <div className="poster-creases" aria-hidden="true" />
         <PaperGrain density={density} />
         <Sheet sheetKey={section.id}>
-          <SectionScreen section={section} revealed={state.revealed} />
+          <SectionScreen
+            section={section}
+            revealed={state.revealed}
+            enteredAt={state.sectionEnteredAt}
+            paused={state.blackout || state.frozen}
+          />
         </Sheet>
         {state.blackout ? <div className="blackout" aria-hidden="true" /> : null}
       </main>

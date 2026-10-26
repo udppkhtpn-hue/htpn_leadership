@@ -112,6 +112,11 @@ Then clear the test data: in the editor, run **clearAllResponses**.
 This catches everyone once. Editing the code does **not** change what the `/exec`
 URL serves.
 
+> **If you deployed before the moderation queue landed:** `Code.gs` gained an
+> `action=pending` endpoint, which is what feeds the approve / hide / star queue
+> on `#/presenter`. Re-paste `Code.gs` and re-deploy a new version, or the queue
+> will report `unknown action`.
+
 **Deploy → Manage deployments → the pencil icon → Version: New version → Deploy.**
 
 The URL stays the same, so nothing in `src/config.ts` needs touching.
@@ -127,6 +132,7 @@ The URL stays the same, so nothing in `src/config.ts` needs touching.
 | `?action=results&kind=…&promptId=…` | GET | Projector and console, every 2.5 s while a module is open |
 | `{"action":"submit",…}` | POST | Phones, once per device per prompt |
 | `{"action":"control","pin":…}` | POST | The console only |
+| `?action=pending&pin=…&promptId=…` | GET | The console's moderation queue |
 | `?action=export&pin=…` | GET | CSV of responses and votes, after the talk |
 
 POSTs send `Content-Type: text/plain` on purpose: it avoids the CORS preflight
@@ -150,8 +156,22 @@ come from `CacheService` with a 30-second TTL, rebuilt on every write; phones
 poll state only every ~9 seconds and stop entirely when the screen is off; only
 two devices in the room poll results. Writes are serialised with `LockService`.
 
-`#/test` (Phase 4) simulates 150 phones against the real deployment so you can
-confirm this before the day.
+Measured against this deployment: 150 independent clients reading state at the
+same instant all answered within 4.3 s, p50 2.2 s, nothing dropped.
+
+Two tools for this:
+
+```bash
+npm run test:load -- --phones 150 --prompt wc-opposite --pin YOUR_PIN
+```
+
+simulates 150 **independent** phones from Node, opens the prompt for the run and
+closes it after (add `--reset` to clear the rows too). This is the one to trust.
+
+`#/test` drives the same simulation inside the browser, which is useful for
+watching the projector react on real devices — but Apps Script serialises
+requests that share a client session, so past a dozen or so virtual phones that
+page measures its own queue rather than the backend.
 
 ## Privacy
 

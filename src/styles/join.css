@@ -1,0 +1,213 @@
+/* ---------------------------------------------------------------------------
+   The phone screen. Same paper, same type, but no photographs and no heavy
+   motion: it has to be instant on a cheap Android over hospital 4G.
+   --------------------------------------------------------------------------- */
+
+.join {
+  min-height: 100svh;
+  background: var(--color-cream);
+  color: var(--color-ink);
+  padding: 1.25rem 1.1rem calc(2.5rem + env(safe-area-inset-bottom));
+  display: grid;
+  gap: 1.25rem;
+  align-content: start;
+}
+
+.join__eyebrow {
+  margin: 0;
+  font-family: var(--font-type);
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  color: var(--color-sepia);
+}
+
+.join__question {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(1.9rem, 8.5vw, 2.8rem);
+  line-height: 0.98;
+  text-wrap: balance;
+}
+
+.join__hint {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.5;
+  color: color-mix(in srgb, var(--color-ink) 80%, var(--color-cream));
+}
+
+.join__card {
+  background: color-mix(in srgb, #fff 58%, var(--color-cream));
+  border: 1px solid color-mix(in srgb, var(--color-sepia) 32%, transparent);
+  box-shadow: 0.25rem 0.3rem 0 color-mix(in srgb, var(--color-ink) 12%, transparent);
+  padding: 1.1rem;
+  display: grid;
+  gap: 0.85rem;
+}
+
+/* --- Inputs --------------------------------------------------------------- */
+
+.join__field {
+  width: 100%;
+  font-family: var(--font-display);
+  font-size: 1.75rem;
+  line-height: 1.2;
+  color: var(--color-ink);
+  background: color-mix(in srgb, #fff 70%, var(--color-cream));
+  border: 0;
+  border-bottom: 3px solid var(--color-ink);
+  border-radius: 0;
+  padding: 0.6rem 0.5rem;
+  min-height: 56px;
+}
+
+textarea.join__field {
+  font-family: var(--font-body);
+  font-size: 1.1rem;
+  line-height: 1.45;
+  min-height: 7.5rem;
+  resize: none;
+}
+
+.join__field:focus-visible {
+  outline: 3px solid var(--color-cobalt);
+  outline-offset: 2px;
+}
+
+.join__count {
+  margin: 0;
+  justify-self: end;
+  font-family: var(--font-type);
+  font-size: 0.75rem;
+  color: var(--color-sepia);
+}
+
+.join__count--limit { color: var(--color-cobalt); }
+
+/* --- Buttons -------------------------------------------------------------- */
+
+.join__option,
+.join__submit,
+.join__secondary {
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  min-height: 56px;
+  border-radius: 0;
+}
+
+.join__option {
+  display: flex;
+  gap: 0.85rem;
+  align-items: baseline;
+  width: 100%;
+  padding: 0.95rem 1rem;
+  background: color-mix(in srgb, #fff 58%, var(--color-cream));
+  border: 2px solid color-mix(in srgb, var(--color-ink) 70%, transparent);
+  font-family: var(--font-body);
+  font-size: 1.05rem;
+  line-height: 1.35;
+  color: var(--color-ink);
+}
+
+.join__option-key {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  line-height: 1;
+  color: var(--color-cobalt);
+}
+
+.join__option[aria-pressed='true'] {
+  background: var(--color-cobalt);
+  border-color: var(--color-cobalt);
+  color: #fff;
+}
+
+.join__option[aria-pressed='true'] .join__option-key { color: #fff; }
+
+.join__submit {
+  width: 100%;
+  padding: 1rem;
+  text-align: center;
+  background: var(--color-cobalt);
+  border: 2px solid var(--color-cobalt);
+  color: #fff;
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  letter-spacing: 0.02em;
+}
+
+.join__submit[disabled] {
+  background: color-mix(in srgb, var(--color-sepia-light) 60%, var(--color-cream));
+  border-color: color-mix(in srgb, var(--color-sepia) 40%, transparent);
+  color: color-mix(in srgb, var(--color-ink) 45%, var(--color-cream));
+  cursor: not-allowed;
+}
+
+.join__secondary {
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid color-mix(in srgb, var(--color-sepia) 45%, transparent);
+  padding: 0.75rem 0;
+  font-family: var(--font-type);
+  font-size: 0.85rem;
+  color: var(--color-cobalt);
+}
+
+/* --- Confirmation: the answer is pasted down onto the paper ---------------- */
+
+@keyframes paste-down {
+  0% { opacity: 0; transform: translateY(-14px) rotate(-3.5deg) scale(1.04); }
+  70% { opacity: 1; transform: translateY(0) rotate(1.2deg) scale(1); }
+  100% { opacity: 1; transform: translateY(0) rotate(-0.8deg) scale(1); }
+}
+
+.join__pasted {
+  position: relative;
+  background: color-mix(in srgb, #fff 72%, var(--color-cream));
+  border: 1px solid color-mix(in srgb, var(--color-sepia) 30%, transparent);
+  box-shadow: 0.3rem 0.35rem 0 color-mix(in srgb, var(--color-ink) 14%, transparent);
+  padding: 1.25rem 1.1rem;
+  font-family: var(--font-body);
+  font-size: 1.15rem;
+  line-height: 1.4;
+  animation: paste-down 0.5s cubic-bezier(0.2, 0.9, 0.3, 1.1) both;
+}
+
+/* The strip of tape that lands with it. */
+.join__pasted::before {
+  content: '';
+  position: absolute;
+  top: -0.75rem;
+  left: 1.25rem;
+  width: 4.5rem;
+  height: 1.6rem;
+  transform: rotate(-6deg);
+  background: linear-gradient(
+    100deg,
+    color-mix(in srgb, var(--color-sepia-light) 60%, transparent),
+    color-mix(in srgb, var(--color-cream) 70%, transparent)
+  );
+  box-shadow: 0 0.2rem 0.4rem -0.2rem color-mix(in srgb, var(--color-ink) 40%, transparent);
+}
+
+.join__status {
+  margin: 0;
+  font-family: var(--font-type);
+  font-size: 0.8rem;
+  line-height: 1.5;
+  color: var(--color-cobalt);
+}
+
+.join__footer {
+  margin: 0;
+  font-family: var(--font-type);
+  font-size: 0.7rem;
+  line-height: 1.5;
+  color: color-mix(in srgb, var(--color-sepia) 92%, var(--color-ink));
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .join__pasted { animation: none; }
+}

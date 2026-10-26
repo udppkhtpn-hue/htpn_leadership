@@ -8,7 +8,8 @@
     "build": "tsc --noEmit && vite build",
     "preview": "vite preview --port 4173",
     "typecheck": "tsc --noEmit",
-    "test:backend": "node backend/test/harness.cjs"
+    "test:backend": "node backend/test/harness.cjs",
+    "test:load": "node backend/test/load.mjs"
   },
   "dependencies": {
     "@fontsource-variable/playfair-display": "^5.3.0",

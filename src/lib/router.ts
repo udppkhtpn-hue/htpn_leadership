@@ -19,6 +19,13 @@ export function useRoute(): Route {
   return route
 }
 
+/** Query string after the hash route, e.g. #/join?prompt=wc-opposite */
+export function hashQuery(): URLSearchParams {
+  const hash = window.location.hash
+  const index = hash.indexOf('?')
+  return new URLSearchParams(index === -1 ? '' : hash.slice(index + 1))
+}
+
 export const go = (route: Route) => {
   window.location.hash = `#/${route}`
 }

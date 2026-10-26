@@ -129,6 +129,13 @@ check('80 char cap', (() => {
   return String(row[4]).length === 80;
 })());
 
+console.log('\nmoderation queue');
+check('pending needs a pin', JSON.parse(sandbox.doGet({ parameter: { action: 'pending', promptId: 'board-drains' } }).text).error === 'bad pin');
+const queue = get({ action: 'pending', pin: '1910', promptId: 'board-drains' }).data.notes;
+check('queue returns every note whatever its status', queue.length === 3 && queue.some((n) => n.status === 'approved') && queue.some((n) => n.status === 'pending'), queue.map((n) => n.status));
+check('queue marks the flagged note', queue.some((n) => n.flagged === true && /Dr Ahmad/.test(n.text)), queue);
+check('queue carries the starred note', queue.some((n) => n.starred === true), queue);
+
 console.log('\nvote');
 post({ action: 'control', pin: '1910', op: 'set', sectionId: 'vote-potassium', moduleKind: 'vote', promptId: 'sc-potassium', open: true });
 ['v1','v2','v3'].forEach((d) => post({ action: 'submit', kind: 'vote', promptId: 'sc-potassium', deviceId: d, option: 'C' }));

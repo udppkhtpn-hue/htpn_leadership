@@ -1,8 +1,7 @@
 import { config } from '../config'
-import { findBoardPrompt, findWordCloudPrompt } from '../content/prompts'
-import { findScenario } from '../content/scenarios'
 import type { Section } from '../content/types'
 import { QrCode } from './QrCode'
+import { LiveSection } from './LiveSection'
 
 /* ---------------------------------------------------------------------------
    Phase 1 screens: correct type, scale, palette and one hero per section.
@@ -61,33 +60,6 @@ function Lead({ children }: { children: string }) {
   )
 }
 
-function ModulePlaceholder({ question, detail }: { question: string; detail: string }) {
-  return (
-    <div
-      className="hero"
-      style={{
-        background: 'color-mix(in srgb, var(--color-cream) 92%, #fff)',
-        padding: 'clamp(1.5rem, 4vw, 3.5rem)',
-        boxShadow: '0 1.5rem 3rem -1rem color-mix(in srgb, var(--color-ink) 40%, transparent)',
-        maxWidth: '68ch',
-      }}
-    >
-      <Display size="var(--text-statement)">{question}</Display>
-      <p
-        style={{
-          fontFamily: 'var(--font-type)',
-          fontSize: 'var(--text-stamp)',
-          letterSpacing: '0.12em',
-          marginTop: '2rem',
-          color: 'var(--color-cobalt)',
-        }}
-      >
-        {detail}
-      </p>
-    </div>
-  )
-}
-
 const frame: React.CSSProperties = {
   position: 'relative',
   zIndex: 20,
@@ -98,7 +70,19 @@ const frame: React.CSSProperties = {
   padding: 'clamp(2rem, 5vw, 6rem)',
 }
 
-export function SectionScreen({ section, revealed }: { section: Section; revealed: boolean }) {
+export function SectionScreen({
+  section,
+  revealed,
+  enteredAt,
+  paused,
+}: {
+  section: Section
+  revealed: boolean
+  /** When this section came on screen, for the vote countdown. */
+  enteredAt: number
+  /** Blackout or frozen: live modules stop polling. */
+  paused: boolean
+}) {
   const p = section.props
   const alignment: React.CSSProperties =
     section.layout === 'hero-left'
@@ -261,75 +245,19 @@ export function SectionScreen({ section, revealed }: { section: Section; reveale
         </div>
       )
 
-    case 'wordcloud': {
-      const prompt = section.module ? findWordCloudPrompt(section.module.promptId) : undefined
+    case 'wordcloud':
+    case 'board':
+    case 'vote':
       return (
-        <div style={{ ...frame, ...alignment }}>
-          <ModulePlaceholder
-            question={prompt?.question ?? section.title}
-            detail="Live word cloud — wired to the backend in Phase 4"
+        <div style={{ ...frame, justifyContent: 'center', alignItems: 'center' }}>
+          <LiveSection
+            section={section}
+            revealed={revealed}
+            enteredAt={enteredAt}
+            paused={paused}
           />
         </div>
       )
-    }
-
-    case 'board': {
-      const prompt = section.module ? findBoardPrompt(section.module.promptId) : undefined
-      return (
-        <div style={{ ...frame, ...alignment }}>
-          <ModulePlaceholder
-            question={prompt?.question ?? section.title}
-            detail="Moderated board — wired to the backend in Phase 4"
-          />
-        </div>
-      )
-    }
-
-    case 'vote': {
-      const scenario = section.module ? findScenario(section.module.promptId) : undefined
-      return (
-        <div style={{ ...frame, justifyContent: 'center' }}>
-          <div
-            className="hero"
-            style={{
-              background: 'color-mix(in srgb, var(--color-cream) 92%, #fff)',
-              padding: 'clamp(1.5rem, 4vw, 3.5rem)',
-              boxShadow: '0 1.5rem 3rem -1rem color-mix(in srgb, var(--color-ink) 40%, transparent)',
-              maxWidth: '72ch',
-              display: 'grid',
-              gap: '1.5rem',
-            }}
-          >
-            <p
-              className="m-0"
-              style={{ fontFamily: 'var(--font-body)', fontSize: 'var(--text-title)', lineHeight: 1.3 }}
-            >
-              {scenario?.vignette}
-            </p>
-            <ol className="m-0" style={{ listStyle: 'none', padding: 0, display: 'grid', gap: '0.9rem' }}>
-              {(scenario?.options ?? []).map((option) => (
-                <li key={option.key} style={{ display: 'flex', gap: '1rem', alignItems: 'baseline' }}>
-                  <span
-                    style={{
-                      fontFamily: 'var(--font-display)',
-                      fontSize: 'var(--text-title)',
-                      color: 'var(--color-cobalt)',
-                    }}
-                  >
-                    {option.key}
-                  </span>
-                  <span style={{ fontFamily: 'var(--font-body)', fontSize: 'var(--text-lead)' }}>
-                    {option.text}
-                    {revealed ? ` — ${option.style}` : ''}
-                  </span>
-                </li>
-              ))}
-            </ol>
-            <Stamp>{revealed ? 'Revealed' : 'Press R to reveal the styles'}</Stamp>
-          </div>
-        </div>
-      )
-    }
 
     case 'close':
       return (
