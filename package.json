@@ -9,7 +9,9 @@
     "preview": "vite preview --port 4173",
     "typecheck": "tsc --noEmit",
     "test:backend": "node backend/test/harness.cjs",
-    "test:load": "node backend/test/load.mjs"
+    "test:load": "node backend/test/load.mjs",
+    "backend:push": "clasp push -f",
+    "backend:deploy": "clasp push -f && clasp redeploy AKfycbwwSilczIDZ8AXOJ-TIAB909lkA6Ye3EcbHdYFcb2e0D_KaVDEO63LU5DQRDDkqnLd8 -d \"pushed from clasp\""
   },
   "dependencies": {
     "@fontsource-variable/playfair-display": "^5.3.0",

@@ -42,7 +42,13 @@ npm run preview    # serve dist on :4173
 npm run typecheck  # tsc --noEmit
 npm run test:backend  # runs backend/Code.gs against a stubbed Apps Script runtime
 npm run test:load     # simulates N independent phones against the deployment
+npm run backend:push  # clasp push of backend/ to the Apps Script project
+npm run backend:deploy # push, then update the live deployment to a new version
 ```
+
+The backend deploys with `clasp`, logged in as the account that owns the Sheet
+(`ffairis@gmail.com`), with the Apps Script API enabled for that account. The
+script id is in `.clasp.json`; neither it nor the `/exec` URL is a secret.
 
 ## Folder structure
 

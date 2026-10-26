@@ -109,8 +109,37 @@ Then clear the test data: in the editor, run **clearAllResponses**.
 
 ## Re-deploying after a change
 
-This catches everyone once. Editing the code does **not** change what the `/exec`
-URL serves.
+### The quick way: clasp
+
+The repo is wired to the script, so a backend change is one command:
+
+```bash
+npm run backend:deploy
+```
+
+That pushes `backend/Code.gs` and `backend/appsscript.json`, then updates the
+existing deployment to a new version — the `/exec` URL never changes.
+
+Two things it depends on, both per Google account:
+
+- `clasp` is logged in as the account that **owns** the Sheet
+  (`clasp show-authorized-user` to check; `clasp logout && clasp login` to swap).
+  The wrong account fails with "The caller does not have permission".
+- The Apps Script API is ON at
+  [script.google.com/home/usersettings](https://script.google.com/home/usersettings).
+
+`clasp push` overwrites the remote with the local files, so if you have edited
+anything in the Apps Script editor, run `clasp pull` first or the change is lost.
+
+There is also a second, `@HEAD` deployment on this script. A HEAD deployment
+always serves the latest push, with no version step — handy for trying something
+mid-rehearsal. Keep `src/config.ts` pointing at the versioned URL for the talk
+itself, so a stray push cannot change what the room is using.
+
+### The manual way
+
+Still worth knowing, in case clasp is blocked. Editing the code does **not**
+change what the `/exec` URL serves.
 
 > **If you deployed before the moderation queue landed:** `Code.gs` gained an
 > `action=pending` endpoint, which is what feeds the approve / hide / star queue
