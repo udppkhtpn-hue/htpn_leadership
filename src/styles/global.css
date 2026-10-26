@@ -1,0 +1,131 @@
+@import '@fontsource/anton/400.css';
+@import '@fontsource-variable/playfair-display/wght.css';
+@import '@fontsource/libre-caslon-text/400.css';
+@import '@fontsource/libre-caslon-text/700.css';
+@import '@fontsource/special-elite/400.css';
+@import '@fontsource/ibm-plex-mono/400.css';
+@import '@fontsource/ibm-plex-mono/500.css';
+
+@import 'tailwindcss';
+@import './theme.css';
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  background: var(--color-ink);
+  color: var(--color-ink);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+:focus-visible {
+  outline: 3px solid var(--color-cobalt);
+  outline-offset: 3px;
+}
+
+/* ---------------------------------------------------------------------------
+   The poster plane. Every #/present screen is a top-down photograph of one
+   printed sheet: cream paper, worn edges, two fold creases, sitting on a dark
+   surface. Phase 2 swaps the procedural wear for pre-rendered textures.
+   --------------------------------------------------------------------------- */
+.poster {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  background: var(--color-cream);
+  box-shadow: var(--paper-shadow);
+  isolation: isolate;
+}
+
+/* Darkened, slightly dirty edges and corners. */
+.poster::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 40;
+  background:
+    radial-gradient(
+      120% 100% at 50% 50%,
+      transparent 55%,
+      color-mix(in srgb, var(--color-sepia) 22%, transparent) 88%,
+      color-mix(in srgb, var(--color-ink) 30%, transparent) 100%
+    );
+}
+
+/* Two fold creases: a shadow with a paper highlight beside it. */
+.poster-creases {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  background:
+    linear-gradient(
+      90deg,
+      transparent calc(33.4% - 2px),
+      color-mix(in srgb, var(--color-sepia) 28%, transparent) 33.4%,
+      color-mix(in srgb, #fff 55%, transparent) calc(33.4% + 1.5px),
+      transparent calc(33.4% + 4px)
+    ),
+    linear-gradient(
+      8deg,
+      transparent calc(71% - 2px),
+      color-mix(in srgb, var(--color-sepia) 20%, transparent) 71%,
+      color-mix(in srgb, #fff 45%, transparent) calc(71% + 1.5px),
+      transparent calc(71% + 4px)
+    );
+  opacity: 0.7;
+}
+
+/* Act 1 is denser and more worn; Act 3 is quiet. Set on the poster element. */
+.poster[data-act='1'] .poster-creases { opacity: 0.95; }
+.poster[data-act='3'] .poster-creases { opacity: 0.35; }
+
+/* Decoration lives behind the hero and never competes with it. */
+.collage-layer {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.hero {
+  position: relative;
+  z-index: 20;
+  max-width: 76ch;
+}
+
+.blackout {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background: #000;
+}
+
+.cursor-hidden,
+.cursor-hidden * {
+  cursor: none !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}

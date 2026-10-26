@@ -1,0 +1,110 @@
+/* The presenter console: functional, dark, no collage. */
+.console {
+  height: 100%;
+  overflow: auto;
+  background: var(--color-console);
+  color: color-mix(in srgb, var(--color-cream) 92%, #fff);
+  font-family: var(--font-mono);
+  padding: 1.25rem;
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+  align-content: start;
+}
+
+.console__panel {
+  background: var(--color-console-raised);
+  border: 1px solid color-mix(in srgb, var(--color-cream) 14%, transparent);
+  padding: 1rem;
+}
+
+.console__label {
+  margin: 0 0 0.5rem;
+  font-size: 0.7rem;
+  letter-spacing: 0.16em;
+  color: color-mix(in srgb, var(--color-sepia-light) 80%, transparent);
+}
+
+.console__now {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(1.75rem, 3.5vw, 2.75rem);
+  line-height: 1;
+  color: var(--color-cream);
+}
+
+.console__timers {
+  display: flex;
+  gap: 1.5rem;
+  font-size: clamp(1.5rem, 3vw, 2.25rem);
+}
+
+.console__notes {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 1.05rem;
+  line-height: 1.55;
+  white-space: pre-wrap;
+  max-width: 68ch;
+}
+
+.console__row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.console button,
+.console select,
+.console input {
+  font: inherit;
+  color: inherit;
+  background: color-mix(in srgb, var(--color-cream) 10%, transparent);
+  border: 1px solid color-mix(in srgb, var(--color-cream) 26%, transparent);
+  padding: 0.6rem 0.9rem;
+  min-height: 44px;
+  cursor: pointer;
+}
+
+.console button[aria-pressed='true'] {
+  background: var(--color-cobalt);
+  border-color: var(--color-cobalt);
+  color: #fff;
+}
+
+.console__list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 0.2rem;
+  font-size: 0.85rem;
+}
+
+.console__list button {
+  width: 100%;
+  text-align: left;
+  background: transparent;
+  border: 0;
+  border-left: 3px solid transparent;
+  padding: 0.35rem 0.5rem;
+  min-height: 34px;
+}
+
+.console__list li[data-current='true'] button {
+  border-left-color: var(--color-cobalt);
+  background: color-mix(in srgb, var(--color-cobalt) 22%, transparent);
+}
+
+.console__warn {
+  border-left: 3px solid var(--color-cobalt);
+  padding-left: 0.75rem;
+  font-size: 0.85rem;
+  line-height: 1.5;
+}
+
+.console__over { color: #ff8a6b; }
+
+@media (max-width: 900px) {
+  .console { grid-template-columns: minmax(0, 1fr); }
+}

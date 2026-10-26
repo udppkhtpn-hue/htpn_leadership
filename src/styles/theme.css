@@ -1,0 +1,35 @@
+/* ---------------------------------------------------------------------------
+   HTPN Lead Live — design tokens. Defined once; every surface reads from here.
+   Palette is closed: cobalt, cream, ink, sepia, light sepia. Nothing else but
+   transparency of these five.
+   --------------------------------------------------------------------------- */
+@theme {
+  --color-cobalt: #1d3fc4;
+  --color-cream: #efe6d2;
+  --color-ink: #141210;
+  --color-sepia: #8a6640;
+  --color-sepia-light: #c9ae88;
+
+  /* Presenter dashboard only — a dark neutral mixed from ink, not a new hue. */
+  --color-console: #15130f;
+  --color-console-raised: #211d17;
+
+  --font-display: 'Anton', 'Arial Narrow', sans-serif;
+  --font-serif: 'Playfair Display Variable', 'Playfair Display', Georgia, serif;
+  --font-body: 'Libre Caslon Text', Georgia, serif;
+  --font-type: 'Special Elite', 'Courier New', monospace;
+  --font-mono: 'IBM Plex Mono', ui-monospace, monospace;
+
+  /* Fluid scale. Hero sizes are set for the back row of a 150-seat hall. */
+  --text-number: clamp(5rem, 15vw, 15rem);
+  --text-hero: clamp(3rem, 8.5vw, 9.5rem);
+  --text-statement: clamp(2.25rem, 5.6vw, 5.5rem);
+  --text-title: clamp(1.75rem, 3.2vw, 3.25rem);
+  --text-lead: clamp(1.2rem, 2vw, 2rem);
+  --text-body: clamp(1rem, 1.15vw, 1.3rem);
+  --text-stamp: clamp(0.7rem, 0.9vw, 0.95rem);
+
+  /* Collage geometry */
+  --tilt-hero: 1.4deg;      /* hero never exceeds 3deg */
+  --paper-shadow: 0 2.5rem 5rem -1.5rem color-mix(in srgb, var(--color-ink) 55%, transparent);
+}
