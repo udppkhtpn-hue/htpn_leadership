@@ -1,4 +1,4 @@
-import type { CSSProperties } from 'react'
+import { Fragment, type CSSProperties } from 'react'
 import { config } from '../config'
 import type { Section } from '../content/types'
 import { QrCode } from './QrCode'
@@ -140,6 +140,47 @@ export function SectionScreen({ section, step, revealed, enteredAt, paused }: Se
       <>
         <Composition section={section} />
         <KeyIdea text={p.headline ?? ''} sectionId={section.id} />
+      </>
+    )
+  }
+
+  // The first thing the room reads: what this session is, who is giving it,
+  // which course it sits in, and when. The topic stays the hero; the rest is
+  // apparatus, set small as a filled-in form.
+  if (section.type === 'titlecard') {
+    return (
+      <>
+        <Composition section={section} />
+        <div style={stage(section)}>
+          <div className="hero titlecard" style={{ ...heroStyle, gap: undefined }}>
+            {p.headline ? <Display>{p.headline}</Display> : null}
+            {p.sub ? <Lead>{p.sub}</Lead> : null}
+            <div className="titlecard__rule" />
+            <div className="titlecard__foot">
+              {p.credits?.length ? (
+                <dl className="titlecard__credits">
+                  {p.credits.map((credit) => (
+                    <Fragment key={credit.label}>
+                      <dt className="titlecard__label">{credit.label}</dt>
+                      <dd className="titlecard__value">{credit.value}</dd>
+                    </Fragment>
+                  ))}
+                </dl>
+              ) : null}
+              {p.dateStamp ? (
+                /* The one accent on the sheet. */
+                <Stamp
+                  variant="rubber"
+                  className="titlecard__date"
+                  seed={`${section.id}:date`}
+                  rotate={-2.4}
+                >
+                  {p.dateStamp}
+                </Stamp>
+              ) : null}
+            </div>
+          </div>
+        </div>
       </>
     )
   }

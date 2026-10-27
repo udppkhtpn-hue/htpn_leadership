@@ -102,6 +102,9 @@ repeats the same four beats:
 
 ## Rules
 
+- **The session's own facts live on the title screen** (`titlecard`), and the
+  index page reads them from there through `SESSION`, so the projector and the
+  link can never disagree about the date or who is giving it.
 - **All content lives in `src/content/sections.ts`.** Copy, order, timings and
   presenter notes change there, never in a component. `TODO_WRITE` marks copy
   still waiting on Ferwahn's words.

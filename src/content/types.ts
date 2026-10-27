@@ -2,6 +2,7 @@ export type Act = 1 | 2 | 3
 
 export type SectionType =
   | 'actcard'
+  | 'titlecard'
   | 'statement'
   | 'framework'
   | 'keyidea'
@@ -123,6 +124,13 @@ export interface SectionProps {
   attribution?: string
   /** framework sections */
   framework?: Framework
+  /**
+   * titlecard sections: the facts of the session, set as a filled-in form.
+   * Label left, value right, in the order they should be read.
+   */
+  credits?: { label: string; value: string }[]
+  /** The date, pressed in as a rubber stamp rather than listed as a credit. */
+  dateStamp?: string
   /** data sections */
   value?: string
   unit?: string

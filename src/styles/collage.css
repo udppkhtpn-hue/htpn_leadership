@@ -249,3 +249,64 @@
 [data-idle='false'] .idle-bleed {
   animation: none;
 }
+
+/* --- The title card: the session, set as a dated hospital circular -------- */
+
+.titlecard {
+  display: grid;
+  gap: clamp(1rem, 2.2vh, 2rem);
+  justify-items: start;
+}
+
+.titlecard__rule {
+  width: 100%;
+  height: 3px;
+  background: var(--color-ink);
+}
+
+/* The form, then the stamp pressed below it. Stacked at every width rather
+   than side by side at some of them: a projector cannot be previewed, so the
+   arrangement must not depend on how wide the hall's screen turns out to be. */
+.titlecard__foot {
+  display: grid;
+  justify-items: start;
+  gap: clamp(0.9rem, 2vh, 1.75rem);
+  width: 100%;
+}
+
+/* The facts as a filled-in form: label left, value right, one row each. */
+.titlecard__credits {
+  margin: 0;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.3rem clamp(1rem, 2vw, 2rem);
+  align-items: baseline;
+}
+
+.titlecard__label {
+  margin: 0;
+  font-family: var(--font-type);
+  font-size: var(--text-stamp);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--color-sepia) 88%, var(--color-ink));
+  white-space: nowrap;
+}
+
+.titlecard__value {
+  margin: 0;
+  font-family: var(--font-type);
+  font-size: clamp(0.95rem, 1.5vw, 1.5rem);
+  line-height: 1.3;
+  color: var(--color-ink);
+}
+
+/* A date stamp is what a hospital document carries, so the date is pressed in
+   rather than listed as one more row of the form. */
+.titlecard__date {
+  font-size: clamp(1rem, 1.9vw, 1.9rem);
+  letter-spacing: 0.08em;
+  padding: 0.5rem 1rem;
+  opacity: 1;
+  flex-shrink: 0;
+}

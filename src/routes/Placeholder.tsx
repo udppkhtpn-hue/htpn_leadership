@@ -1,4 +1,8 @@
+import { Fragment } from 'react'
+import { SESSION } from '../content/sections'
 import { go, type Route } from '../lib/router'
+// The index borrows the title screen's stamp and form, so it needs their rules.
+import '../styles/collage.css'
 
 const LINKS: { route: Route; label: string; detail: string }[] = [
   { route: 'present', label: '#/present', detail: 'Projector screen' },
@@ -9,7 +13,11 @@ const LINKS: { route: Route; label: string; detail: string }[] = [
   { route: 'print', label: '#/print', detail: 'Backup PDF of static sections — Phase 5' },
 ]
 
-/** Index and not-yet-built routes. Never shown during the talk. */
+/**
+ * The index. Not the projector screen, but the first thing anyone opening the
+ * link sees, so it says what the session is, who is giving it and when before
+ * it offers the routes.
+ */
 export function Placeholder({ title, detail }: { title: string; detail?: string }) {
   return (
     <main
@@ -38,6 +46,17 @@ export function Placeholder({ title, detail }: { title: string; detail?: string 
           {detail}
         </p>
       ) : null}
+      <div className="titlecard__foot" style={{ maxWidth: '54ch' }}>
+        <dl className="titlecard__credits">
+          {SESSION.credits.map((credit) => (
+            <Fragment key={credit.label}>
+              <dt className="titlecard__label">{credit.label}</dt>
+              <dd className="titlecard__value">{credit.value}</dd>
+            </Fragment>
+          ))}
+        </dl>
+        <span className="stamp stamp--rubber titlecard__date">{SESSION.date}</span>
+      </div>
       <ul style={{ margin: 0, padding: 0, listStyle: 'none', display: 'grid', gap: '0.5rem' }}>
         {LINKS.map((link) => (
           <li key={link.route}>

@@ -54,17 +54,23 @@ export const SECTIONS: Section[] = [
   {
     id: 'title',
     act: 1,
-    type: 'statement',
-    title: 'Title',
+    type: 'titlecard',
+    title: 'Title — the session, and who is giving it',
     layout: 'hero-left',
     minutes: 0.5,
     block: 'leadership',
-    notes: 'Read the title out loud, slowly. Then: this is not a talk about promotion.',
+    notes:
+      'Read the title out loud, slowly. Then: this is not a talk about promotion.\n\nThe room can read the rest for itself — do not read the credits out.',
     props: {
       drawing: 'window',
       headline: 'Be the senior you needed.',
       sub: 'Leadership is a choice, not a rank.',
-      stamp: 'HTPN · Kajang',
+      credits: [
+        { label: 'Presenter', value: 'Ferwahn Fairis' },
+        { label: 'Course', value: 'TODO_WRITE — the course this session sits in.' },
+        { label: 'Venue', value: 'Hospital Tengku Permaisuri Norashikin, Kajang' },
+      ],
+      dateStamp: 'Friday 30 October 2026',
     },
   },
   {
@@ -903,6 +909,25 @@ export function sectionsFor(sequence: SequenceId): Section[] {
 
 export const totalMinutes = (sequence: SequenceId) =>
   sectionsFor(sequence).reduce((sum, s) => sum + s.minutes, 0)
+
+/**
+ * The facts of the session, read off the title screen so the index page and
+ * the projector can never disagree about the date or who is giving it.
+ */
+export const SESSION = {
+  get topic() {
+    return BY_ID.get('title')?.props.headline ?? ''
+  },
+  get sub() {
+    return BY_ID.get('title')?.props.sub ?? ''
+  },
+  get credits() {
+    return BY_ID.get('title')?.props.credits ?? []
+  },
+  get date() {
+    return BY_ID.get('title')?.props.dateStamp ?? ''
+  },
+}
 
 /** How many clicker presses a section takes before it moves on. */
 export const stepsOf = (section: Section | undefined) => Math.max(1, section?.steps ?? 1)
