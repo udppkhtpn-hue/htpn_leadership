@@ -4,3 +4,6 @@ dist
 *.local
 .vite
 npm-debug.log*
+
+# Licensed source articles: read locally, never served or committed.
+reference/
