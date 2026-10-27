@@ -65,10 +65,15 @@ export const SECTIONS: Section[] = [
       drawing: 'window',
       headline: 'Be the senior you needed.',
       sub: 'Leadership is a choice, not a rank.',
+      // No venue row: the course title already names the hospital, and the
+      // room is sitting in it.
       credits: [
         { label: 'Presenter', value: 'Ferwahn Fairis' },
-        { label: 'Course', value: 'TODO_WRITE — the course this session sits in.' },
-        { label: 'Venue', value: 'Hospital Tengku Permaisuri Norashikin, Kajang' },
+        {
+          label: 'Course',
+          value:
+            'Kursus Kepimpinan Jabatan Perubatan, Hospital Tengku Permaisuri Norashikin (HTPN) 2026',
+        },
       ],
       dateStamp: 'Friday 30 October 2026',
     },
