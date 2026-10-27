@@ -81,6 +81,7 @@ export function Presenter() {
     sections,
     section,
     nextSection,
+    steps,
     moduleOpen,
     goTo,
     next,
@@ -90,6 +91,7 @@ export function Presenter() {
     restart,
   } = usePresentation()
   const now = useClock()
+  const stepNote = steps > 1 ? (section.stepNotes?.[state.step] ?? null) : null
   const [lastControl, setLastControl] = useState<string | null>(null)
   const pushedFor = useRef('')
 
@@ -200,6 +202,7 @@ export function Presenter() {
         <section className="console__panel">
           <p className="console__label">
             Now · {state.index + 1} of {sections.length} · Act {section.act} · {section.minutes} min
+            {steps > 1 ? ` · reveal ${state.step + 1} of ${steps}` : ''}
           </p>
           <h1 className="console__now">{section.title}</h1>
           <div className="console__timers" style={{ marginTop: '0.75rem' }}>
@@ -216,6 +219,14 @@ export function Presenter() {
         <section className="console__panel">
           <p className="console__label">Notes</p>
           <p className="console__notes">{section.notes}</p>
+          {stepNote ? (
+            <>
+              <p className="console__label" style={{ marginTop: '0.75rem' }}>
+                This reveal · {state.step + 1} of {steps}
+              </p>
+              <p className="console__notes console__notes--step">{stepNote}</p>
+            </>
+          ) : null}
         </section>
 
         <section className="console__panel">

@@ -1,18 +1,25 @@
+import { SIX_STYLES, formatCorrelation } from './styles'
+
 /**
- * Goleman's six leadership styles with their published correlation to
- * organisational climate. Used by the "Boss or Leader?" vote: each option is
- * secretly mapped to a style, revealed only when I press R.
+ * The six styles keyed for the scenario vote, reading their labels and
+ * correlations from the same cards the framework screen reveals — the vote's
+ * reveal and the teaching screen must never disagree about a number.
  */
+const card = (name: string) => {
+  const match = SIX_STYLES.find((style) => style.name === name)
+  if (!match) throw new Error(`Unknown leadership style: ${name}`)
+  return { label: match.name, correlation: match.correlation, gloss: match.phrase }
+}
+
 export const GOLEMAN = {
-  coercive: { label: 'Coercive', correlation: -0.26, gloss: 'Do what I tell you.' },
-  pacesetting: { label: 'Pacesetting', correlation: -0.25, gloss: 'Do as I do, now.' },
-  affiliative: { label: 'Affiliative', correlation: 0.46, gloss: 'People come first.' },
-  democratic: { label: 'Democratic', correlation: 0.43, gloss: 'What do you think?' },
-  coaching: { label: 'Coaching', correlation: 0.42, gloss: 'Try this.' },
-  authoritative: { label: 'Authoritative', correlation: 0.54, gloss: 'Come with me.' },
+  coercive: card('Coercive'),
+  pacesetting: card('Pacesetting'),
+  affiliative: card('Affiliative'),
+  democratic: card('Democratic'),
+  coaching: card('Coaching'),
+  authoritative: card('Authoritative'),
 } as const
 
 export type GolemanStyle = keyof typeof GOLEMAN
 
-export const formatCorrelation = (value: number) =>
-  `${value < 0 ? '−' : '+'}.${String(Math.round(Math.abs(value) * 100)).padStart(2, '0')}`
+export { formatCorrelation }

@@ -1,0 +1,324 @@
+/* ---------------------------------------------------------------------------
+   Teaching screens: framework sheets, the key-idea line, the progress map.
+
+   A framework is a specimen sheet, not a slide. Its header is deliberately
+   small — the model is the hero — and the source is pressed into the corner
+   so no claim ever appears on the projector without its author.
+   --------------------------------------------------------------------------- */
+
+.fw {
+  position: absolute;
+  inset: 0;
+  z-index: 20;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  gap: clamp(0.75rem, 1.6vh, 1.75rem);
+  padding: clamp(1.75rem, 4vw, 4rem) clamp(2rem, 5vw, 5rem) clamp(1.25rem, 3vh, 2.5rem);
+}
+
+.fw__head {
+  display: grid;
+  gap: 0.35rem;
+  justify-items: center;
+  text-align: center;
+  max-width: 62rem;
+  justify-self: center;
+}
+
+.fw__name {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: var(--text-title);
+  line-height: 1;
+  letter-spacing: 0.01em;
+  color: var(--color-ink);
+}
+
+.fw__definition {
+  margin: 0;
+  font-family: var(--font-serif);
+  font-size: var(--text-lead);
+  line-height: 1.35;
+  text-wrap: balance;
+  color: color-mix(in srgb, var(--color-ink) 82%, var(--color-cream));
+}
+
+.fw__rule {
+  width: min(28rem, 60%);
+  height: 2px;
+  margin-top: 0.3rem;
+  background: color-mix(in srgb, var(--color-ink) 45%, transparent);
+}
+
+.fw__model {
+  display: grid;
+  min-height: 0;
+}
+
+/* A model that is only a plate centres itself; one that draws a whole
+   apparatus (a card index, a pyramid) fills the sheet instead. */
+.fw__todo {
+  margin: auto;
+}
+
+.fw__foot {
+  justify-self: end;
+  align-self: end;
+}
+
+.fw__todo:where(p) {
+  font-family: var(--font-type);
+  font-size: var(--text-title);
+  color: var(--color-sepia);
+  border: 2px dashed color-mix(in srgb, var(--color-sepia) 60%, transparent);
+  padding: 1.5rem 2.5rem;
+  text-align: center;
+  max-width: 42rem;
+  line-height: 1.4;
+}
+
+/* ------------------------------------------------- six leadership styles -- */
+
+.styles {
+  display: grid;
+  grid-template-rows: 1fr auto;
+  gap: clamp(1rem, 2.5vh, 2.25rem);
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+}
+
+.styles__stage {
+  display: grid;
+  place-items: center;
+  min-height: 0;
+}
+
+/* The card in hand. One at a time, so it reads from the back row. */
+.style-card {
+  width: min(70vw, 56rem);
+  background: color-mix(in srgb, var(--color-sepia-light) 18%, #fff);
+  padding: clamp(1.25rem, 2.6vw, 2.5rem) clamp(1.5rem, 3vw, 3rem) clamp(1.1rem, 2.2vw, 2rem);
+  box-shadow: 0.4rem 0.45rem 0 color-mix(in srgb, var(--color-ink) 18%, transparent);
+  display: grid;
+  gap: clamp(0.5rem, 1.2vh, 1rem);
+  /* The ruled line of an index card, in sepia rather than the usual red. */
+  border-top: 3px solid var(--color-sepia);
+}
+
+.style-card__name {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(2.75rem, 6vw, 5.75rem);
+  line-height: 0.9;
+  color: var(--color-ink);
+}
+
+.style-card__phrase {
+  margin: 0;
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: clamp(1.6rem, 3.1vw, 3rem);
+  line-height: 1.15;
+  color: var(--color-cobalt);
+  text-wrap: balance;
+}
+
+.style-card__when {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: var(--text-lead);
+  line-height: 1.35;
+  color: color-mix(in srgb, var(--color-ink) 80%, var(--color-cream));
+}
+
+.style-card__closing {
+  width: min(70vw, 54rem);
+  margin: 0;
+  font-family: var(--font-serif);
+  font-size: clamp(1.75rem, 3.4vw, 3.25rem);
+  line-height: 1.22;
+  text-wrap: balance;
+  text-align: center;
+  color: var(--color-ink);
+}
+
+/* ------ the ruled measure: climate correlation drawn as a bar on a scale -- */
+
+.measure {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 0.9rem;
+}
+
+.measure__track {
+  position: relative;
+  height: var(--measure-height, 0.85rem);
+  background: color-mix(in srgb, var(--color-ink) 7%, transparent);
+}
+
+/* The zero line the bars are measured from. */
+.measure__zero {
+  position: absolute;
+  top: -0.35rem;
+  bottom: -0.35rem;
+  width: 2px;
+  background: color-mix(in srgb, var(--color-ink) 70%, transparent);
+}
+
+.measure__bar {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  background: var(--color-cobalt);
+}
+
+.measure__bar--negative {
+  background: var(--color-sepia);
+}
+
+.measure__figure {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  font-size: var(--measure-figure, var(--text-title));
+  line-height: 1;
+  color: var(--color-cobalt);
+}
+
+.measure__figure--negative {
+  color: var(--color-sepia);
+}
+
+/* ------------------------------------- the filed strip of revealed cards -- */
+
+.styles__strip {
+  display: grid;
+  gap: 0.4rem;
+  justify-items: end;
+}
+
+/* The figures need their axis named once, quietly, or +.54 means nothing. */
+.styles__legend {
+  margin: 0;
+  font-family: var(--font-type);
+  font-size: var(--text-stamp);
+  letter-spacing: 0.04em;
+  color: color-mix(in srgb, var(--color-sepia) 85%, transparent);
+}
+
+.styles__filed {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: clamp(0.5rem, 1.2vw, 1.25rem);
+  width: 100%;
+  align-items: end;
+}
+
+.filed {
+  display: grid;
+  gap: 0.4rem;
+  min-height: 3.5rem;
+  padding-top: 0.5rem;
+  border-top: 2px solid color-mix(in srgb, var(--color-ink) 45%, transparent);
+  transition: opacity 0.4s ease, border-color 0.4s ease;
+}
+
+/* An empty slot still reads as a slot, so the room can see how many cards
+   are left to come without being told. */
+.filed--empty {
+  border-top-style: dashed;
+  border-top-color: color-mix(in srgb, var(--color-ink) 34%, transparent);
+}
+
+.filed--dimmed {
+  opacity: 0.4;
+}
+
+.filed__name {
+  font-family: var(--font-display);
+  font-size: clamp(0.9rem, 1.5vw, 1.45rem);
+  line-height: 1;
+  color: var(--color-ink);
+}
+
+.filed--lifted .filed__name {
+  color: var(--color-cobalt);
+}
+
+/* -------------------------------------------------------------- key idea -- */
+
+.keyidea {
+  position: absolute;
+  inset: 0;
+  z-index: 20;
+  display: grid;
+  place-content: center;
+  padding: clamp(2rem, 6vw, 7rem);
+}
+
+.keyidea__line {
+  margin: 0;
+  max-width: min(80%, 58rem);
+  font-family: var(--font-type);
+  font-size: clamp(1.9rem, 4.2vw, 4rem);
+  line-height: 1.22;
+  text-align: center;
+  color: var(--color-ink);
+}
+
+.keyidea__caret {
+  color: var(--color-cobalt);
+}
+
+.keyidea__rule {
+  height: 4px;
+  margin: clamp(1rem, 2.5vh, 2rem) auto 0;
+  background: var(--color-cobalt);
+  transform-origin: left center;
+  transition: transform 0.5s ease;
+}
+
+/* --------------------------------------------------------- progress map -- */
+
+.progress-map {
+  position: absolute;
+  left: clamp(1.5rem, 3vw, 3rem);
+  bottom: clamp(1.25rem, 2.5vh, 2.25rem);
+  z-index: 25;
+  display: flex;
+  align-items: baseline;
+  gap: clamp(0.5rem, 1.1vw, 1rem);
+  font-family: var(--font-type);
+  font-size: var(--text-stamp);
+  letter-spacing: 0.04em;
+  color: color-mix(in srgb, var(--color-sepia) 70%, transparent);
+  pointer-events: none;
+}
+
+.progress-map__station {
+  display: flex;
+  align-items: baseline;
+  gap: 0.4rem;
+}
+
+.progress-map__tick {
+  width: 0.55rem;
+  height: 2px;
+  background: currentColor;
+  transform: translateY(-0.3em);
+}
+
+.progress-map__station--current {
+  color: var(--color-cobalt);
+}
+
+.progress-map__part {
+  color: inherit;
+  opacity: 0.85;
+}
+
+.progress-map__arrow {
+  opacity: 0.5;
+}

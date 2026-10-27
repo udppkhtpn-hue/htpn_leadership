@@ -69,6 +69,37 @@ src/routes/              Present, Presenter, Join, Placeholder, Styleguide, Test
 src/styles/              theme.css (tokens), global.css, presenter.css
 ```
 
+## The teaching spine
+
+The talk is one spine, "Leading Self and Others", in seven blocks. Every block
+repeats the same four beats:
+
+| Beat | What it is |
+|---|---|
+| Teach | `framework` screens — one model drawn per screen, revealed element by element |
+| Show | a story, a number or a clip that makes the model real |
+| Try | the room does something: a word cloud, a board, a vote |
+| Key | a `keyidea` screen: one line, typed, closing the block |
+
+- A `framework` screen is a specimen sheet: small typewritten header (name,
+  one-sentence definition), the model drawn large as the hero, source stamped
+  into the corner. **No claim reaches the projector without its author and
+  year.**
+- **Progressive reveal.** `steps` on a section is how many clicker presses it
+  takes before moving on; `stepNotes[]` is what to say at each one. The reveal
+  step lives in `LiveState.step`, so `#/present` and `#/presenter` stay in
+  step over BroadcastChannel. Stepping *backwards* into a screen lands on its
+  last step, so a model is never replayed by accident.
+- **`block` puts a screen on the progress map** (`src/content/blocks.ts`):
+  four stations, Leadership → Leading Self (Purpose · EI) → Leading Others
+  (Trust · Styles) → Legacy. The map is suppressed on act cards, the cold open
+  and the close.
+- **A model that is specified but not drawn renders a visible `[TODO]` plate**,
+  never an empty sheet, so a gap is obvious in rehearsal.
+- **One source of truth for the six styles:** `src/content/styles.ts`. The vote
+  reveal reads its labels and correlations from the same cards the framework
+  screen reveals, so the two can never disagree about a number.
+
 ## Rules
 
 - **All content lives in `src/content/sections.ts`.** Copy, order, timings and

@@ -9,7 +9,7 @@ import {
   type ReactNode,
 } from 'react'
 import { openChannel, readMirror, type Channel } from '../lib/channel'
-import { sectionsFor, type SequenceId } from '../content/sections'
+import { sectionsFor, stepsOf, type SequenceId } from '../content/sections'
 import type { Section } from '../content/types'
 
 export interface LiveState {
@@ -17,6 +17,8 @@ export interface LiveState {
   rev: number
   sequence: SequenceId
   index: number
+  /** Reveal step within the current section, 0-based. */
+  step: number
   blackout: boolean
   revealed: boolean
   frozen: boolean
@@ -31,6 +33,7 @@ const initialState = (): LiveState => ({
   rev: 0,
   sequence: 'full60',
   index: 0,
+  step: 0,
   blackout: false,
   revealed: false,
   frozen: false,
@@ -51,6 +54,8 @@ interface PresentationValue {
   goTo: (index: number) => void
   next: () => void
   prev: () => void
+  /** How many clicker presses this section takes before it moves on. */
+  steps: number
   toggle: (key: 'blackout' | 'revealed' | 'frozen' | 'hideCursor' | 'reducedEffects') => void
   setSequence: (sequence: SequenceId) => void
   restart: () => void
@@ -95,38 +100,54 @@ export function PresentationProvider({ children }: { children: ReactNode }) {
   const section = sections[index]
 
   const goTo = useCallback(
-    (target: number) => {
+    (target: number, atStep: 'first' | 'last' = 'first') => {
       const clamped = Math.max(0, Math.min(target, sections.length - 1))
       if (clamped === stateRef.current.index) return
       commit({
         index: clamped,
-        // A new sheet starts un-revealed and unfrozen.
+        // Arriving forwards, a sheet starts bare; arriving backwards it is
+        // already fully revealed, so stepping back never replays a model.
+        step: atStep === 'last' ? stepsOf(sections[clamped]) - 1 : 0,
         revealed: false,
         frozen: false,
         sectionEnteredAt: Date.now(),
         startedAt: stateRef.current.startedAt ?? Date.now(),
       })
     },
-    [commit, sections.length],
+    [commit, sections],
   )
+
+  // Each clicker press reveals the next element of the current screen, and
+  // only moves on once the screen is whole.
+  const steps = stepsOf(section)
+  const step = Math.min(state.step, steps - 1)
 
   const value = useMemo<PresentationValue>(
     () => ({
-      state: { ...state, index },
+      state: { ...state, index, step },
+      steps,
       sections,
       section,
       nextSection: sections[index + 1] ?? null,
       moduleOpen: Boolean(section?.module) && !state.blackout && !state.frozen,
       update: commit,
       goTo,
-      next: () => goTo(index + 1),
-      prev: () => goTo(index - 1),
+      next: () => (step < steps - 1 ? commit({ step: step + 1 }) : goTo(index + 1)),
+      prev: () => (step > 0 ? commit({ step: step - 1 }) : goTo(index - 1, 'last')),
       toggle: (key) => commit({ [key]: !state[key] } as Partial<LiveState>),
-      setSequence: (sequence) => commit({ sequence, index: 0, sectionEnteredAt: Date.now() }),
+      setSequence: (sequence) =>
+        commit({ sequence, index: 0, step: 0, sectionEnteredAt: Date.now() }),
       restart: () =>
-        commit({ index: 0, revealed: false, frozen: false, startedAt: null, sectionEnteredAt: Date.now() }),
+        commit({
+          index: 0,
+          step: 0,
+          revealed: false,
+          frozen: false,
+          startedAt: null,
+          sectionEnteredAt: Date.now(),
+        }),
     }),
-    [commit, goTo, index, section, sections, state],
+    [commit, goTo, index, section, sections, state, step, steps],
   )
 
   return <PresentationContext.Provider value={value}>{children}</PresentationContext.Provider>

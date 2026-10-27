@@ -5,6 +5,8 @@ import { QrCode } from './QrCode'
 import { LiveSection } from './LiveSection'
 import { Composition } from './Composition'
 import { VideoSection } from './VideoSection'
+import { FrameworkScreen } from './FrameworkScreen'
+import { KeyIdea } from './KeyIdea'
 import { Drop, InkBlot, PhotoCutout, SplitFlapNumber, Stamp, TapeStrip } from '../collage'
 
 /* ---------------------------------------------------------------------------
@@ -92,12 +94,14 @@ function Lead({ children }: { children: string }) {
 
 export interface SectionScreenProps {
   section: Section
+  /** Reveal step within this screen, 0-based. */
+  step: number
   revealed: boolean
   enteredAt: number
   paused: boolean
 }
 
-export function SectionScreen({ section, revealed, enteredAt, paused }: SectionScreenProps) {
+export function SectionScreen({ section, step, revealed, enteredAt, paused }: SectionScreenProps) {
   const p = section.props
   const heroStyle: CSSProperties = {
     maxWidth: HERO_WIDTH[section.layout] ?? 'min(70%, 62rem)',
@@ -116,6 +120,26 @@ export function SectionScreen({ section, revealed, enteredAt, paused }: SectionS
             <LiveSection section={section} revealed={revealed} enteredAt={enteredAt} paused={paused} />
           </div>
         </div>
+      </>
+    )
+  }
+
+  // Teaching screens. The collage stays thin: a framework has to be copied
+  // into a notebook from the back row, and a key idea is one line of type.
+  if (section.type === 'framework' && p.framework) {
+    return (
+      <>
+        <Composition section={section} />
+        <FrameworkScreen framework={p.framework} step={step} />
+      </>
+    )
+  }
+
+  if (section.type === 'keyidea') {
+    return (
+      <>
+        <Composition section={section} />
+        <KeyIdea text={p.headline ?? ''} sectionId={section.id} />
       </>
     )
   }
