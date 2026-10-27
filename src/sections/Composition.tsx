@@ -46,7 +46,7 @@ export function Composition({
   // else it can go in the margin alongside any extras.
   const extras = p.extras ?? []
   const photos: { src?: string; alt: string; plain?: boolean }[] =
-    section.type === 'image'
+    section.type === 'image' || section.type === 'titlecard'
       ? extras
       : [...(p.src && section.type !== 'video' ? [{ src: p.src, alt: p.alt ?? '' }] : []), ...extras]
 
@@ -76,6 +76,7 @@ export function Composition({
         src={photo.src}
         alt={photo.alt}
         halftone={!photo.plain && density >= 3 && index === 0}
+        tone={photo.plain ? 'none' : 'sepia'}
         edge={photo.plain ? 'straight' : left ? 'torn' : 'scissor'}
         style={FILL}
       />,

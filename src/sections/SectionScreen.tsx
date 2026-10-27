@@ -151,8 +151,40 @@ export function SectionScreen({ section, step, revealed, enteredAt, paused }: Se
     return (
       <>
         <Composition section={section} />
+        {p.src ? (
+          /* The session's own collage, mounted whole down the right of the
+             sheet. It fills the side the type leaves empty and never enters
+             the hero column. */
+          <Drop
+            seed={`${section.id}:panel`}
+            delay={0.45}
+            rotate={1.1}
+            style={{
+              position: 'absolute',
+              top: '-2%',
+              bottom: '-2%',
+              right: '1.5%',
+              width: 'min(34%, 32rem)',
+              zIndex: 15,
+            }}
+          >
+            <PhotoCutout
+              seed={`${section.id}:panel`}
+              src={p.src}
+              alt={p.alt ?? section.title}
+              edge="straight"
+              tone="none"
+              idle={false}
+              rotate={0}
+              style={{ position: 'relative', width: '100%', height: '100%' }}
+            />
+          </Drop>
+        ) : null}
         <div style={stage(section)}>
-          <div className="hero titlecard" style={{ ...heroStyle, gap: undefined }}>
+          <div
+            className="hero titlecard"
+            style={{ ...heroStyle, gap: undefined, maxWidth: p.src ? 'min(58%, 52rem)' : heroStyle.maxWidth }}
+          >
             {p.headline ? <Display>{p.headline}</Display> : null}
             {p.sub ? <Lead>{p.sub}</Lead> : null}
             <div className="titlecard__rule" />

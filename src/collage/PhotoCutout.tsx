@@ -11,7 +11,12 @@ interface PhotoCutoutProps {
   /** Seed for the tear and the rotation; use the section or piece id. */
   seed: string
   edge?: EdgeStyle
-  tone?: 'sepia' | 'grayscale'
+  /**
+   * 'none' leaves the image untouched: a piece that was assembled by hand and
+   * already carries the palette must not be greyed and sepia'd a second time,
+   * or its cobalt goes to mud.
+   */
+  tone?: 'sepia' | 'grayscale' | 'none'
   halftone?: boolean
   /** Degrees; clamped to the brief's -6 to +6. */
   rotate?: number
@@ -50,7 +55,13 @@ export function PhotoCutout({
   return (
     <motion.figure
       layoutId={morphId}
-      className={['cutout', tone === 'grayscale' ? 'cutout--grayscale' : '', idle ? 'idle-drift' : '', className]
+      className={[
+        'cutout',
+        tone === 'grayscale' ? 'cutout--grayscale' : '',
+        tone === 'none' ? 'cutout--untoned' : '',
+        idle ? 'idle-drift' : '',
+        className,
+      ]
         .filter(Boolean)
         .join(' ')}
       style={{

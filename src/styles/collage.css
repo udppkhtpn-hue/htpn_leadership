@@ -40,6 +40,7 @@
 }
 
 .cutout--grayscale .cutout__img { filter: grayscale(1) contrast(1.1); }
+.cutout--untoned .cutout__img { filter: none; }
 
 .cutout__halftone {
   position: absolute;

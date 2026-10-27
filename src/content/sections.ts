@@ -63,6 +63,10 @@ export const SECTIONS: Section[] = [
       'Read the title out loud, slowly. Then: this is not a talk about promotion.\n\nThe room can read the rest for itself — do not read the credits out.',
     props: {
       drawing: 'window',
+      // Assembled by hand, already torn and taped and already in the palette,
+      // so it is mounted as it is rather than cut out again.
+      src: '/images/landing-collage.jpg',
+      alt: 'A hand-assembled collage: a ward team conferring in the corridor at HTPN, torn prints of the hospital, on a cobalt ground.',
       headline: 'Be the senior you needed.',
       sub: 'Leadership is a choice, not a rank.',
       // No venue row: the course title already names the hospital, and the
