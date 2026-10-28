@@ -1,145 +1,126 @@
 # What each page still needs
 
-Audited against the 60-minute running order. Page numbers are what you press on
-the console. Everything lives in `src/content/sections.ts` unless noted.
+Audited on 28 October 2026 against the running order in
+`src/content/sections.ts`. Page numbers are what you press on the console;
+they move whenever a screen is added, so each item also gives the screen's
+title. Copy lives in `src/content/sections.ts`, scenarios in
+`src/content/scenarios.ts`.
 
-Two kinds of problem:
+Every teaching model is drawn, and nothing on the projector is copy I made up
+for you. What is left is five things only you can supply, two loose ends on
+the Swenson clip, and a timing problem with the short version.
 
-- **Empty** — marked `TODO_WRITE`, nothing to show. Pages 7, 9, 10, 14, 15, 18.
-- **Mine** — I wrote placeholder copy so the screen was not blank. It is
-  competent filler, not your argument. Page 17 and the clipping on 13.
+| Page | Screen | What is missing | In the 45-minute cut? |
+|---|---|---|---|
+| 10 | Show — bullying | The figure, what it measured, the source | Yes |
+| 21 | Show — empathy clip | The video and its caption | No |
+| 34 | Try — Boss or Leader? scenario 2 | The whole scenario | Yes |
+| 35 | Try — Boss or Leader? scenario 3 | The whole scenario, or drop it | No |
+| 36 | Try — Boss or Leader? scenario 4 | The whole scenario, or drop it | No |
 
-Everything else is your own words from the brief and needs nothing.
-
----
-
-## Length limits that matter
-
-The display type scales to fit, so a long line is not broken — it is just
-smaller. These are the thresholds where a line stops being a hall-sized
-statement:
-
-| Field | Keep under | Why |
-|---|---|---|
-| Statement headline | **30 characters** | Full height. Up to 52 is still strong; past 88 it reads as a paragraph. |
-| Data figure | **4 characters** | `1889`, `62%`, `+.54` all sit at full size. |
-| Data label | ~90 characters | One line under the figure. |
-| Clipping body | 200–320 characters | A newspaper column; longer overflows the cutting. |
-| Quote | **88 characters** | Set in the serif, slightly smaller than a headline. |
-| Timeline entry | ~60 characters each | Four entries side by side with the time. |
-| Vote option | ~110 characters | Four of them have to fit on one sheet with the vignette. |
+Pages 10 and 34 are all that stand between the 45-minute version and done.
 
 ---
 
-## The security guard story  *(done)*
+## Page 10 — Show: bullying  *(empty)*
 
-Now page 5, `already-led`: the Show beat of Block 0, between the three quotes
-and the word cloud. Your story, as told on 28 October: "Not her job. She did it
-anyway." with the clipping beside it. To fit it inside the hour, page 4 (the
-quotes) went from 2 minutes to 1.5 and the word cloud from 2.5 to 2.
+**Job:** the third number in Block 1, after 6,212 doctors who left and 13,072
+empty posts. Your note for it: the one the room already knows; do not labour it.
 
-The page numbers in the rest of this file predate the teaching spine and are
-no longer the numbers you press; go by each section's title.
-
-## Page 7 — the cost figure  *(empty)*
-
-**Job:** the number that makes Act I uncomfortable. It sits in a pasted
-clipping with the figure split-flapping into place.
+**On screen now:** `TODO_WRITE %` and two `TODO_WRITE` lines.
 
 **What I need:**
 
-1. **The figure** — four characters or fewer (`62%`, `1 in 4`, `18`)
-2. **What it measures** — one line, under 90 characters
-3. **The source** — publication and year, shown as a stamp
-4. **Two or three sentences of context** for the clipping beside it
+1. **The figure.** Four characters or fewer, so it sits at full size: `62%`,
+   `1 in 4`.
+2. **What it measures.** One line, under 90 characters.
+3. **The source.** Study, journal and year, for the stamp. A link is enough:
+   I will check the number against it before it goes on the projector, as I
+   did for 6,212.
 
-Any of these work: the MOH burnout or attrition figures, a housemen turnover
-number, a published incident-reporting rate. It should hurt a little.
+A Malaysian figure on junior doctors or housemen lands hardest after two MOH
+numbers.
 
-## Page 9 — the Swenson video  *(empty)*
+## Page 21 — Show: empathy clip  *(empty)*
 
-**Job:** four minutes where someone else makes the argument.
+**Job:** the Show beat of Block 3, straight after the five EI cards. It has a
+3-minute slot.
 
 **What I need:**
 
-1. **The file** — `public/media/swenson.mp4`, under 10 MB, trimmed to the part
-   you actually play. Tell me the URL and I will trim and compress it.
-2. **One line of attribution** for under the frame — speaker, talk, year.
+1. **The file**, dropped into `public/media/` like the Swenson clip. Any name
+   is fine; I will rename it to `empathy.mp4`.
+2. **One line of attribution** for under the frame: who, what, year.
 
-It plays on entering the page and pauses on `B`. If the clip is longer than
-four minutes, say where to cut it.
+Until then the screen shows a labelled placeholder, and the caption reads
+`TODO_WRITE`. The 45-minute cut skips this page.
 
-## Page 10 — what it costs  *(empty)*
+## Pages 34–36 — Try: Boss or Leader? scenarios 2, 3 and 4  *(empty)*
 
-**Job:** closes Act I. The room should be uncomfortable before the interval in
-tone.
+**Job:** more votes after the K+ 6.8 scenario (page 33), each revealing which
+of Goleman's six styles the room reached for.
 
-**What I need:** one sentence, **88 characters or fewer**, naming what bad
-seniority costs a patient — plus who said it, if it is a quotation. This is the
-hardest line in the talk and it should be yours, not a borrowed aphorism.
+**On screen now:** `TODO_WRITE` as the vignette and as all four options, on all
+three pages, and on the audience's phones when the vote opens.
 
-## Page 13 — the climate figure  *(mine, check)*
+**What I need for each, in `src/content/scenarios.ts`:**
 
-The figure `+.54` and the Goleman framing are from your brief and are correct.
-The clipping beside it is my summary of the HBR finding. Read it and tell me if
-you want it in your words.
+1. **A vignette.** Two or three sentences, a real ward moment.
+2. **Four options**, each under 110 characters.
+3. **Which style each option is:** coercive, pacesetting, affiliative,
+   democratic, coaching or authoritative.
 
-## Page 14 — the second scenario  *(empty)*
-
-**Job:** the second "Boss or Leader?" vote, after the K+ 6.8 one has landed.
-
-**What I need, in `src/content/scenarios.ts`:**
-
-1. **A vignette** — two or three sentences, a real ward moment
-2. **Four options**, each under 110 characters
-3. **Which Goleman style each option is** — coercive, pacesetting, affiliative,
-   democratic, coaching, authoritative
-
-The first scenario works because every option is defensible and the trap (D,
+The K+ 6.8 scenario works because every option is defensible and the trap (D,
 warmth without standards) is the one people pick. Aim for the same shape.
-Scenarios 3 and 4 exist as placeholders and are not in the running order; write
-them only if you want more than two votes.
 
-## Page 15 — the empathy video  *(empty)*
-
-Same as page 9: `public/media/empathy.mp4` and one line of attribution.
-
-## Page 17 — "the smallest unit of leadership"  *(mine, rewrite)*
-
-**Job:** turns Act II from theory into something to do on the next shift.
-
-**On screen now:** "The smallest unit of leadership is one handover done
-properly." — my line.
-
-**What I need:** the three concrete things you will actually name. Small enough
-that an HO can do one tomorrow. I will set the strongest as the headline and
-the other two beneath, or fold them into page 18.
-
-## Page 18 — one shift, hour by hour  *(empty)*
-
-**Job:** the practical core of Act II.
-
-**What I need:** four moments in one on-call shift, each with a time and one
-line under 60 characters.
-
-The four slots are `07:00`, `11:00`, `16:00`, `22:00` and the placeholders read:
-handover · the HO who is drowning · the call you do not want to make · what you
-write in the notes. Keep those beats or replace them — but the times should be
-real ones from your own shifts.
+Scenario 2 is in both versions of the talk. Scenarios 3 and 4 are only in the
+60-minute version, but they are in it: if you do not want four votes, say so
+and I will take them out of the running order rather than leave two blank
+pages in the hour.
 
 ---
 
-## Still missing, not copy
+## The Swenson clip, page 26  *(plays, two loose ends)*
 
-| File | Page |
-|---|---|
-| `public/media/swenson.mp4` | 9 |
-| `public/media/empathy.mp4` | 15 |
-| `public/images/hands-handover.jpg` | 6 — margin |
-| `public/images/night-window.jpg` | 10 — margin |
+`public/media/swenson.mp4` plays on entering the page, captioned "Capt.
+William Swenson, Ganjgal, Afghanistan, 2009. US Army helmet-camera footage."
 
-Both images fall back to a labelled placeholder, so those pages are usable
-without them. The videos are not.
+- **It is longer than its slot.** The clip runs 2:32; the running order gives
+  it 2 minutes. Either press `B` at two minutes, or tell me which half-minute
+  to take from elsewhere so the slot can be 2.5.
+- **It is 13.3 MB,** over the 10 MB limit in `ASSETS.md`. It still plays and is
+  cached for offline use (the service worker takes up to 24 MB per file), so
+  this is about load time on the hospital wifi, not about it working.
+  Compressing it needs ffmpeg, which is not installed on this machine.
+
+Check the caption is right for this footage before the talk: it is the
+standard description of the Swenson clip, not something read off the file.
+
+---
+
+## The 45-minute cut runs 50 minutes
+
+The short version drops the empathy clip, the five dysfunctions, the
+drains/energises board, compassionate leadership and scenarios 3 and 4. Those
+add up to 10 minutes, so the cut is 50 minutes, not 45. Tell me what else to
+drop, or which slots to shorten, if 45 is a hard stop.
+
+---
+
+## Done since the first draft of this file
+
+| Page | Screen | What changed |
+|---|---|---|
+| 4, 11, 20, 24, 29, 40 | Every framework screen | All six remaining models drawn; none shows a `[TODO]` plate |
+| 5 | Show — the security guard | Your story: "Not her job. She did it anyway." with the clipping beside it |
+| 8 | Show — resignations | **6,212** medical officers resigned, 2021–2025. Dzulkefly Ahmad, written Dewan Negara reply, 4 August 2026 |
+| 9 | Show — vacant posts | **13,072** sourced: 1,660 specialist + 11,412 non-specialist, as at 30 June 2026. Written Dewan Rakyat reply, 21 October 2026 |
+| 26 | Show — Swenson | Video in place, captioned |
+
+Screens the first draft asked about that the teaching spine has since removed:
+"You have already led today" (the story now lives on page 5), the single cost
+figure (now pages 8–10), "what it costs", the climate clipping, "the smallest
+unit of leadership" and the one-shift timeline. Nothing is needed for them.
 
 ---
 
@@ -147,13 +128,9 @@ without them. The videos are not.
 
 Send me, in one message:
 
-1. The page 7 figure, its line, and its source
-2. The page 10 sentence
-3. The page 6 story
-4. The four page 18 moments
-5. The page 14 scenario with its four options and styles
-6. Attribution lines for both videos, and URLs if you want me to fetch and trim them
+1. The bullying figure, its line, and a link to the study (page 10)
+2. Scenario 2: vignette, four options, a style for each (page 34)
+3. Scenarios 3 and 4 the same way, or "drop them"
+4. The empathy clip and its attribution line (page 21)
 
-That is every empty screen in the 60-minute run. The 45-minute cut drops pages
-7, 14, 15, 16 and 18, so if you are short of time, items 2, 3 and 6 alone make
-the shorter version complete.
+Items 1 and 2 alone finish the 45-minute version.

@@ -12,7 +12,7 @@ photography of models.
 
 | File | Used on |
 |---|---|
-| `swenson.mp4` | Block 4, after the circle of safety |
+| `swenson.mp4` ✅ | Block 4, after the circle of safety. 13.3 MB, over the limit below |
 | `empathy.mp4` | Block 3, after the five EI cards |
 
 Both play on entering the section and pause on `B`. Add burned-in or sidecar
@@ -59,10 +59,5 @@ components will be pointed at them instead.
 
 ## Copy still to write
 
-`TODO_WRITE` in `src/content/sections.ts` and `src/content/scenarios.ts`:
-
-- the Act I cost statistic, its label and its source
-- the sentence that closes Act I
-- attribution lines for both videos
-- the four lines of the one-shift timeline
-- three of the four "Boss or Leader?" scenarios (the K+ 6.8 one is complete)
+See `CONTENT.md`: it lists every page still waiting on copy, by page number
+and title.
