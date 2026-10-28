@@ -31,11 +31,10 @@ export function Present() {
   // The map is for orientation mid-block. An act card announces the station
   // itself; the cold open, the title and the close belong to nothing but
   // themselves, and nothing has started yet for the map to orient anyone in.
-  const showMap =
-    section.type !== 'actcard' &&
-    section.type !== 'titlecard' &&
-    section.type !== 'close' &&
-    section.id !== 'cold-open'
+  // A live module owns the whole sheet, and on a revealed vote the map sat on
+  // top of the last option's attribution — the one line that block is for.
+  const OFF_MAP = ['actcard', 'titlecard', 'close', 'wordcloud', 'board', 'vote']
+  const showMap = !OFF_MAP.includes(section.type) && section.id !== 'cold-open'
 
   return (
     <EffectsProvider reduced={state.reducedEffects}>

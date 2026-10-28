@@ -141,7 +141,7 @@ export function LiveSection({
   return (
     <div style={{ display: 'grid', gap: 'clamp(1rem, 2vw, 1.75rem)', justifyItems: 'center', width: '100%' }}>
       <TornSheet seed={`sheet-${section.id}`} style={{ width: 'min(92%, 76rem)' }}>
-        <div style={{ display: 'grid', gap: 'clamp(1rem, 2vw, 1.5rem)' }}>
+        <div style={{ display: 'grid', gap: 'clamp(0.6rem, 1.4vw, 1.1rem)' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', gap: '1.5rem' }}>
             <Stamp seed={section.id}>{revealed ? 'Revealed' : 'Vote now'}</Stamp>
             {revealed ? (
@@ -150,7 +150,14 @@ export function LiveSection({
               <Countdown from={enteredAt} seconds={scenario?.seconds ?? 30} />
             )}
           </div>
-          <p style={{ margin: 0, fontFamily: 'var(--font-body)', fontSize: 'var(--text-title)', lineHeight: 1.3 }}>
+          <p
+            style={{
+              margin: 0,
+              fontFamily: 'var(--font-body)',
+              fontSize: 'calc(var(--text-title) * 0.88)',
+              lineHeight: 1.25,
+            }}
+          >
             {scenario?.vignette}
           </p>
           {scenario ? (

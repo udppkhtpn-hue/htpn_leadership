@@ -7,17 +7,15 @@ title. Copy lives in `src/content/sections.ts`, scenarios in
 `src/content/scenarios.ts`.
 
 Every teaching model is drawn, and nothing on the projector is copy I made up
-for you. What is left is four things only you can supply, two loose ends on
-the Swenson clip, and a timing problem with the short version.
+for you. What is left is the empathy clip, two loose ends on the Swenson clip,
+and a timing problem with the short version.
 
 | Page | Screen | What is missing | In the 45-minute cut? |
 |---|---|---|---|
 | 21 | Show — empathy clip | The video and its caption | No |
-| 34 | Try — Boss or Leader? scenario 2 | The whole scenario | Yes |
-| 35 | Try — Boss or Leader? scenario 3 | The whole scenario, or drop it | No |
-| 36 | Try — Boss or Leader? scenario 4 | The whole scenario, or drop it | No |
+| 34–36 | Try — Boss or Leader? scenarios 2–4 | Drafted — read them and change what does not ring true | 34 only |
 
-Page 34 is all that stands between the 45-minute version and done.
+Nothing now blocks the 45-minute version except the Swenson timing.
 
 ---
 
@@ -35,28 +33,32 @@ Page 34 is all that stands between the 45-minute version and done.
 Until then the screen shows a labelled placeholder, and the caption reads
 `TODO_WRITE`. The 45-minute cut skips this page.
 
-## Pages 34–36 — Try: Boss or Leader? scenarios 2, 3 and 4  *(empty)*
+## Pages 34–36 — Try: Boss or Leader? scenarios 2, 3 and 4  *(drafted)*
 
 **Job:** more votes after the K+ 6.8 scenario (page 33), each revealing which
 of Goleman's six styles the room reached for.
 
-**On screen now:** `TODO_WRITE` as the vignette and as all four options, on all
-three pages, and on the audience's phones when the vote opens.
+**On screen now:** three drafted scenarios, in `src/content/scenarios.ts`.
+They work as they stand; the details are mine, so change them for ones the
+room will recognise.
 
-**What I need for each, in `src/content/scenarios.ts`:**
+| Page | Scenario | The right answer | The trap |
+|---|---|---|---|
+| 33 | K+ 6.8, four hours | C, coaching | D — warmth with no standards |
+| 34 | A patient arrests on the round | A, coercive | C — coaching, in the wrong ninety seconds |
+| 35 | Discharge summaries a week late | C or D, authoritative or democratic | A — pacesetting: clearing it yourself teaches nobody |
+| 36 | The specialist who stops answering | C or D, authoritative or coaching | A — keeping the peace, which is indifference |
 
-1. **A vignette.** Two or three sentences, a real ward moment.
-2. **Four options**, each under 110 characters.
-3. **Which style each option is:** coercive, pacesetting, affiliative,
-   democratic, coaching or authoritative.
+Each one makes a different style right and sets a different trap. That is
+deliberate: four scenarios that all reward warmth would teach the room "be
+nice" four times and send them home with nothing.
 
-The K+ 6.8 scenario works because every option is defensible and the trap (D,
-warmth without standards) is the one people pick. Aim for the same shape.
+**When you edit:** keep a vignette under about 100 characters, which is two
+lines on the sheet. At three lines, the fourth option's attribution falls off
+the bottom of a projector that cannot scroll. Options stay under 110.
 
 Scenario 2 is in both versions of the talk. Scenarios 3 and 4 are only in the
-60-minute version, but they are in it: if you do not want four votes, say so
-and I will take them out of the running order rather than leave two blank
-pages in the hour.
+60-minute version.
 
 ---
 

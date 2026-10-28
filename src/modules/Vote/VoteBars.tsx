@@ -16,13 +16,15 @@ export function VoteBars({ options, counts, revealed }: VoteBarsProps) {
   const total = Math.max(1, Object.values(counts).reduce((sum, n) => sum + n, 0))
 
   return (
-    <ol style={{ listStyle: 'none', margin: 0, padding: 0, display: 'grid', gap: '0.9rem' }}>
+    /* Tight on purpose: revealing adds a line under every option, and the
+       sheet cannot grow past the bottom of a projector. */
+    <ol style={{ listStyle: 'none', margin: 0, padding: 0, display: 'grid', gap: '0.45rem' }}>
       {options.map((option, index) => {
         const count = counts[option.key] ?? 0
         const share = count / total
         const style = GOLEMAN[option.style]
         return (
-          <li key={option.key} style={{ display: 'grid', gap: '0.35rem' }}>
+          <li key={option.key} style={{ display: 'grid', gap: '0.2rem' }}>
             <div style={{ display: 'flex', gap: '0.75rem', alignItems: 'baseline' }}>
               <span
                 style={{
@@ -48,7 +50,7 @@ export function VoteBars({ options, counts, revealed }: VoteBarsProps) {
             <div
               style={{
                 position: 'relative',
-                height: '1.6rem',
+                height: '1.15rem',
                 background: 'color-mix(in srgb, var(--color-sepia-light) 35%, transparent)',
               }}
             >
