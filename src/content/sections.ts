@@ -232,12 +232,18 @@ export const SECTIONS: Section[] = [
     layout: 'clipping-right',
     minutes: 1,
     block: 'leadership',
-    notes: 'This is the one the room already knows. Do not labour it.',
+    notes:
+      'This is the one the room already knows. Do not labour it. Most of the room are medical officers: let that sit.\n\nIf asked: 59% is of all 1,074 house officers, naming who subjected them to negative acts, not only those who met the bullying definition. Nurses and support staff 31%, specialists and consultants 27%, other house officers 17%. Bullying itself, weekly or daily over six months, was 13%. Samsudin, Isahak, Rampal, Rosnah and Zakaria, Malays J Med Sci 2021;28(2):142–156.\n\nCodeBlue’s January 2023 poll put it at 41% of housemen, but that was 187 house officers answering an open reader poll, so it is not on screen.',
     props: {
-      value: 'TODO_WRITE',
+      clipping: {
+        kicker: 'Malays J Med Sci, 2021',
+        headline: 'Who the housemen named',
+        body: 'In 12 hospitals across the central zone, 1,074 house officers were asked who had subjected them to negative acts at work. 59% named medical officers, 31% nurses and support staff, 27% specialists. 13% met the study’s definition of being bullied, weekly or daily, over six months.',
+      },
+      value: '59',
       unit: '%',
-      label: 'TODO_WRITE — what the bullying study measured, in one line.',
-      source: 'TODO_WRITE — study, journal and year.',
+      label: 'House officers who named medical officers as a source of negative acts at work.',
+      source: 'Samsudin et al., Malays J Med Sci, 2021. 1,074 house officers.',
     },
   },
   {

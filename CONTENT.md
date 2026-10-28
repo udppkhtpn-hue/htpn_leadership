@@ -7,39 +7,19 @@ title. Copy lives in `src/content/sections.ts`, scenarios in
 `src/content/scenarios.ts`.
 
 Every teaching model is drawn, and nothing on the projector is copy I made up
-for you. What is left is five things only you can supply, two loose ends on
+for you. What is left is four things only you can supply, two loose ends on
 the Swenson clip, and a timing problem with the short version.
 
 | Page | Screen | What is missing | In the 45-minute cut? |
 |---|---|---|---|
-| 10 | Show — bullying | The figure, what it measured, the source | Yes |
 | 21 | Show — empathy clip | The video and its caption | No |
 | 34 | Try — Boss or Leader? scenario 2 | The whole scenario | Yes |
 | 35 | Try — Boss or Leader? scenario 3 | The whole scenario, or drop it | No |
 | 36 | Try — Boss or Leader? scenario 4 | The whole scenario, or drop it | No |
 
-Pages 10 and 34 are all that stand between the 45-minute version and done.
+Page 34 is all that stands between the 45-minute version and done.
 
 ---
-
-## Page 10 — Show: bullying  *(empty)*
-
-**Job:** the third number in Block 1, after 6,212 doctors who left and 13,072
-empty posts. Your note for it: the one the room already knows; do not labour it.
-
-**On screen now:** `TODO_WRITE %` and two `TODO_WRITE` lines.
-
-**What I need:**
-
-1. **The figure.** Four characters or fewer, so it sits at full size: `62%`,
-   `1 in 4`.
-2. **What it measures.** One line, under 90 characters.
-3. **The source.** Study, journal and year, for the stamp. A link is enough:
-   I will check the number against it before it goes on the projector, as I
-   did for 6,212.
-
-A Malaysian figure on junior doctors or housemen lands hardest after two MOH
-numbers.
 
 ## Page 21 — Show: empathy clip  *(empty)*
 
@@ -115,6 +95,7 @@ drop, or which slots to shorten, if 45 is a hard stop.
 | 5 | Show — the security guard | Your story: "Not her job. She did it anyway." with the clipping beside it |
 | 8 | Show — resignations | **6,212** medical officers resigned, 2021–2025. Dzulkefly Ahmad, written Dewan Negara reply, 4 August 2026 |
 | 9 | Show — vacant posts | **13,072** sourced: 1,660 specialist + 11,412 non-specialist, as at 30 June 2026. Written Dewan Rakyat reply, 21 October 2026 |
+| 10 | Show — bullying | **59%** of 1,074 house officers named medical officers as a source of negative acts at work. Samsudin et al., Malays J Med Sci, 2021. CodeBlue's 41% poll is in the notes only |
 | 26 | Show — Swenson | Video in place, captioned |
 
 Screens the first draft asked about that the teaching spine has since removed:
@@ -128,9 +109,8 @@ unit of leadership" and the one-shift timeline. Nothing is needed for them.
 
 Send me, in one message:
 
-1. The bullying figure, its line, and a link to the study (page 10)
-2. Scenario 2: vignette, four options, a style for each (page 34)
-3. Scenarios 3 and 4 the same way, or "drop them"
-4. The empathy clip and its attribution line (page 21)
+1. Scenario 2: vignette, four options, a style for each (page 34)
+2. Scenarios 3 and 4 the same way, or "drop them"
+3. The empathy clip and its attribution line (page 21)
 
-Items 1 and 2 alone finish the 45-minute version.
+Item 1 alone finishes the 45-minute version.
