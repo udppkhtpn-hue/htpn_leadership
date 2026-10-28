@@ -552,22 +552,229 @@
   to { opacity: 1; transform: none; }
 }
 
+/* -------------------------------------------- the trust equation ---------- */
+
+.equation {
+  display: grid;
+  grid-template-rows: minmax(0, 1fr) auto;
+  /* The column is the sheet's width, never the figure's: left to size itself,
+     it grows to the figure's aspect width on a 4:3 projector and takes the
+     caption off the sheet with it. */
+  grid-template-columns: minmax(0, 1fr);
+  gap: clamp(0.75rem, 2vh, 1.75rem);
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  justify-items: center;
+}
+
+.equation__figure {
+  /* Height-first, like every figure on a sheet that cannot scroll. The type
+     inside sizes off the figure itself, so the fraction scales as one piece. */
+  height: 100%;
+  max-width: 100%;
+  aspect-ratio: 100 / 34;
+  justify-self: center;
+  container-type: size;
+  display: grid;
+  grid-template-columns: auto auto;
+  justify-content: center;
+  align-items: center;
+  gap: 3cqw;
+}
+
+.equation__lhs {
+  margin: 0;
+  font-family: var(--font-serif);
+  font-size: min(9cqh, 2.6cqw);
+  line-height: 1;
+  white-space: nowrap;
+  color: var(--color-ink);
+  /* Laid out from the start and only shown on the last press, so writing it
+     in never pushes the fraction across the sheet. */
+  visibility: hidden;
+}
+
+.equation__lhs[data-shown='true'] {
+  visibility: visible;
+  animation: equation-in 0.45s ease;
+}
+
+.equation__fraction {
+  display: grid;
+  justify-items: center;
+  gap: 4cqh;
+}
+
+.equation__top {
+  display: flex;
+  align-items: center;
+}
+
+.equation__slot {
+  display: flex;
+  align-items: center;
+}
+
+.equation__plus {
+  padding: 0 1.4cqw;
+  font-family: var(--font-display);
+  font-size: min(11cqh, 3.2cqw);
+  line-height: 1;
+  color: var(--color-sepia);
+  visibility: hidden;
+}
+
+.equation__plus[data-shown='true'] { visibility: visible; }
+
+/* Each term is an index-card slip, ruled in sepia like the style cards. */
+.equation__slip {
+  display: block;
+  padding: 3cqh 2cqw 2.4cqh;
+  background: color-mix(in srgb, var(--color-sepia-light) 18%, #fff);
+  border-top: 3px solid var(--color-sepia);
+  box-shadow: 0.35rem 0.4rem 0 color-mix(in srgb, var(--color-ink) 18%, transparent);
+  font-family: var(--font-display);
+  /* The width cap is what keeps the whole row on the sheet when a one-line
+     caption hands the figure extra height. */
+  font-size: min(12cqh, 3.4cqw);
+  line-height: 1;
+  white-space: nowrap;
+  color: var(--color-ink);
+}
+
+.equation__slip--ghost {
+  visibility: hidden;
+}
+
+/* Where the leverage is. The one inversion on the sheet. */
+.equation__slip--lever {
+  background: var(--color-cobalt);
+  border-top-color: var(--color-cobalt);
+  color: var(--color-cream);
+  transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+.equation__bar {
+  width: 100%;
+  height: max(4px, 1.2cqh);
+  background: var(--color-ink);
+  transform-origin: left center;
+  transform: scaleX(0);
+}
+
+.equation__bar[data-shown='true'] {
+  animation: strike 0.45s ease forwards;
+}
+
+.equation__body {
+  margin: 0;
+  max-width: min(80%, 48rem);
+  font-family: var(--font-serif);
+  font-size: clamp(1.1rem, 2.4vw, 2.1rem);
+  line-height: 1.25;
+  text-align: center;
+  text-wrap: balance;
+  color: var(--color-ink);
+  animation: circles-body 0.4s ease;
+}
+
+@keyframes equation-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* ---------------------------------------------- the five dysfunctions ------ */
+
+.pyramid {
+  display: grid;
+  grid-template-rows: minmax(0, 1fr) auto;
+  grid-template-columns: minmax(0, 1fr);
+  gap: clamp(0.75rem, 2vh, 1.75rem);
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  justify-items: center;
+}
+
+.pyramid__figure {
+  position: relative;
+  height: 100%;
+  max-width: min(88%, 64rem);
+  aspect-ratio: 100 / 72;
+  justify-self: center;
+  container-type: size;
+}
+
+.pyramid__level {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  place-items: center;
+  background: var(--color-sepia-light);
+}
+
+.pyramid__level--ghost {
+  background: color-mix(in srgb, var(--color-sepia-light) 26%, transparent);
+}
+
+/* The foundation, and the subject of the block. */
+.pyramid__level--base {
+  background: var(--color-cobalt);
+}
+
+.pyramid__name {
+  font-family: var(--font-display);
+  font-size: min(8cqh, 5.4cqw);
+  line-height: 1;
+  white-space: nowrap;
+  color: var(--color-ink);
+}
+
+.pyramid__level--base .pyramid__name {
+  color: var(--color-cream);
+}
+
+.pyramid__body {
+  margin: 0;
+  max-width: min(80%, 48rem);
+  font-family: var(--font-serif);
+  font-size: clamp(1.1rem, 2.4vw, 2.1rem);
+  line-height: 1.25;
+  text-align: center;
+  text-wrap: balance;
+  color: var(--color-ink);
+  animation: circles-body 0.4s ease;
+}
+
 /* The console's reduced-effects toggle, and the OS setting, land everything
    at once rather than withholding the point until an animation finishes. */
 [data-reduced-effects='true'] .myths__strike,
 [data-reduced-effects='true'] .myths__truth,
 [data-reduced-effects='true'] .venn__lens,
-[data-reduced-effects='true'] .circles__body {
+[data-reduced-effects='true'] .circles__body,
+[data-reduced-effects='true'] .equation__lhs,
+[data-reduced-effects='true'] .equation__body,
+[data-reduced-effects='true'] .pyramid__body {
   animation: none;
   opacity: 1;
   transform: none;
 }
 
 [data-reduced-effects='true'] .myths__strike { transform: scaleX(1); }
+[data-reduced-effects='true'] .equation__bar { animation: none; }
+[data-reduced-effects='true'] .equation__bar[data-shown='true'] { transform: scaleX(1); }
+[data-reduced-effects='true'] .equation__slip--lever { transition: none; }
 
 @media (prefers-reduced-motion: reduce) {
   .myths__strike { animation: none; transform: scaleX(1); }
+  .equation__bar { animation: none; }
+  .equation__bar[data-shown='true'] { transform: scaleX(1); }
   .myths__truth,
   .venn__lens,
-  .circles__body { animation: none; opacity: 1; }
+  .circles__body,
+  .equation__lhs,
+  .equation__body,
+  .pyramid__body { animation: none; opacity: 1; }
+  .equation__slip--lever { transition: none; }
 }

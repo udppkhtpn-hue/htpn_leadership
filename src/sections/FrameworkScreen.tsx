@@ -4,6 +4,8 @@ import { StylesModel } from './StylesModel'
 import { VennModel } from './VennModel'
 import { CirclesModel } from './CirclesModel'
 import { MythsModel } from './MythsModel'
+import { EquationModel } from './EquationModel'
+import { PyramidModel } from './PyramidModel'
 
 /* ---------------------------------------------------------------------------
    A framework screen is a specimen sheet: a small typewritten header, the
@@ -26,6 +28,12 @@ function Model({ model, step }: { model: FrameworkModel; step: number }) {
   }
   if (model.kind === 'myths') {
     return <MythsModel pairs={model.pairs} step={step} />
+  }
+  if (model.kind === 'equation') {
+    return <EquationModel terms={model.terms} divisor={model.divisor} step={step} />
+  }
+  if (model.kind === 'pyramid') {
+    return <PyramidModel levels={model.levels} step={step} />
   }
   return (
     <p className="fw__todo">

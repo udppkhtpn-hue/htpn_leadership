@@ -96,7 +96,7 @@ repeats the same four beats:
   and the close.
 - **A model that is specified but not drawn renders a visible `[TODO]` plate**,
   never an empty sheet, so a gap is obvious in rehearsal. Drawn so far:
-  `styles`, `venn`, `circles`, `myths`.
+  `styles`, `venn`, `circles`, `myths`, `equation`, `pyramid`.
 - **Framework figures are sized height-first** — `height: 100%` plus
   `aspect-ratio`, with `max-width` as the cap. Sizing one width-first clamps
   only its height, and the parts inside, which take their size from the width,
