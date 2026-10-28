@@ -230,7 +230,7 @@ export const SECTIONS: Section[] = [
             { left: 'are clear about their purpose', right: 'live a reactive existence' },
             { left: 'lead with values', right: 'command with position power' },
             { left: 'share authority and responsibility', right: 'assign responsibility but keep authority' },
-            { left: 'move from "I" to "We"', right: 'stay fixated on "I"' },
+            { left: 'move from “I” to “We”', right: 'stay fixated on “I”' },
           ],
           closing: 'Coercion gets all of their hands, some of their minds, none of their hearts.',
         },
@@ -841,7 +841,7 @@ export const SECTIONS: Section[] = [
       framework: {
         name: 'Compassionate leadership',
         definition:
-          'Four behaviours in a loop. It includes dealing firmly with poor behaviour; it is not "soft".',
+          'Four behaviours in a loop. It includes dealing firmly with poor behaviour; it is not “soft”.',
         source: 'Michael West, The King’s Fund',
         model: {
           kind: 'loop',
@@ -851,7 +851,7 @@ export const SECTIONS: Section[] = [
             { name: 'Empathising', body: 'Feeling it, without drowning in it.' },
             { name: 'Helping', body: 'Doing something about it.' },
           ],
-          note: 'It includes dealing firmly with poor behaviour. It is not soft.',
+          note: 'It is not soft.',
         },
       },
     },

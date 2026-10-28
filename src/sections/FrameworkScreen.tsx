@@ -6,6 +6,10 @@ import { CirclesModel } from './CirclesModel'
 import { MythsModel } from './MythsModel'
 import { EquationModel } from './EquationModel'
 import { PyramidModel } from './PyramidModel'
+import { QuotesModel } from './QuotesModel'
+import { CompareModel } from './CompareModel'
+import { CardsModel } from './CardsModel'
+import { LoopModel } from './LoopModel'
 
 /* ---------------------------------------------------------------------------
    A framework screen is a specimen sheet: a small typewritten header, the
@@ -35,11 +39,18 @@ function Model({ model, step }: { model: FrameworkModel; step: number }) {
   if (model.kind === 'pyramid') {
     return <PyramidModel levels={model.levels} step={step} />
   }
-  return (
-    <p className="fw__todo">
-      [TODO] the {model.kind} model is specified in sections.ts but not drawn yet.
-    </p>
-  )
+  if (model.kind === 'quotes') {
+    return <QuotesModel quotes={model.quotes} step={step} />
+  }
+  if (model.kind === 'compare') {
+    return (
+      <CompareModel left={model.left} right={model.right} rows={model.rows} closing={model.closing} step={step} />
+    )
+  }
+  if (model.kind === 'cards') {
+    return <CardsModel cards={model.cards} step={step} />
+  }
+  return <LoopModel steps={model.steps} note={model.note} step={step} />
 }
 
 export function FrameworkScreen({ framework, step }: { framework: Framework; step: number }) {

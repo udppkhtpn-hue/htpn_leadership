@@ -759,6 +759,374 @@
   animation: circles-body 0.4s ease;
 }
 
+/* ------------------------------------------------ three quotations -------- */
+
+.quotes {
+  display: grid;
+  place-items: center;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+}
+
+.quotes--together {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  align-items: center;
+  gap: clamp(1rem, 2.4vw, 2.5rem);
+  width: min(96%, 84rem);
+  justify-self: center;
+}
+
+.quotes__drop {
+  width: min(82%, 62rem);
+}
+
+.quotes--together .quotes__drop {
+  width: 100%;
+}
+
+.quote {
+  position: relative;
+  margin: 0;
+  display: grid;
+  gap: clamp(0.75rem, 2vh, 1.5rem);
+  padding: clamp(1.75rem, 4vh, 3rem) clamp(1.5rem, 3.4vw, 3.25rem) clamp(1.25rem, 3vh, 2.25rem);
+  background: color-mix(in srgb, var(--color-sepia-light) 18%, #fff);
+  box-shadow: 0.4rem 0.45rem 0 color-mix(in srgb, var(--color-ink) 18%, transparent);
+}
+
+.quote__text {
+  margin: 0;
+  font-family: var(--font-serif);
+  font-size: clamp(1.75rem, 4vw, 3.6rem);
+  line-height: 1.2;
+  text-wrap: balance;
+  color: var(--color-ink);
+}
+
+.quote__source {
+  font-family: var(--font-type);
+  font-size: clamp(0.95rem, 1.5vw, 1.4rem);
+  line-height: 1.3;
+  color: color-mix(in srgb, var(--color-sepia) 88%, var(--color-ink));
+}
+
+.quotes--together .quote__text {
+  font-size: clamp(1.1rem, 2vw, 1.9rem);
+  line-height: 1.25;
+}
+
+.quotes--together .quote__source {
+  font-size: clamp(0.8rem, 1.05vw, 1.05rem);
+}
+
+/* ------------------------------------------------ the two-column ledger ---- */
+
+.compare {
+  display: grid;
+  grid-template-rows: minmax(0, 1fr) auto;
+  gap: clamp(0.75rem, 2.2vh, 2rem);
+  width: min(94%, 74rem);
+  height: 100%;
+  min-height: 0;
+  justify-self: center;
+  align-content: center;
+}
+
+.compare__ledger {
+  width: 100%;
+  align-self: center;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+.compare__ledger th {
+  padding: 0 clamp(1rem, 2.4vw, 2.5rem) clamp(0.4rem, 1.2vh, 1rem);
+  font-family: var(--font-display);
+  font-weight: normal;
+  font-size: min(4.4vw, 7vh);
+  line-height: 1;
+  text-align: left;
+  color: var(--color-ink);
+  border-bottom: 3px solid var(--color-ink);
+}
+
+.compare__ledger td {
+  padding: clamp(0.35rem, 1.3vh, 1rem) clamp(1rem, 2.4vw, 2.5rem);
+  vertical-align: top;
+  line-height: 1.2;
+  text-wrap: balance;
+  border-bottom: 1px solid color-mix(in srgb, var(--color-sepia) 35%, transparent);
+}
+
+/* The ruled line between the two jobs. */
+.compare__ledger th + th,
+.compare__ledger td + td {
+  border-left: 2px solid var(--color-ink);
+}
+
+.compare__ledger th + th {
+  color: var(--color-sepia);
+}
+
+.compare__ledger td:first-child {
+  font-family: var(--font-serif);
+  font-size: min(2.6vw, 4.1vh);
+  color: var(--color-ink);
+}
+
+.compare__ledger td + td {
+  font-family: var(--font-body);
+  font-size: min(2vw, 3.3vh);
+  color: var(--color-sepia);
+}
+
+.compare__ledger tr[data-state='hidden'] {
+  visibility: hidden;
+}
+
+.compare__ledger tr[data-state='current'] td {
+  animation: equation-in 0.45s ease;
+}
+
+.compare__closing {
+  margin: 0;
+  justify-self: center;
+  max-width: 54rem;
+  font-family: var(--font-type);
+  font-size: min(2.3vw, 3.6vh);
+  line-height: 1.3;
+  text-align: center;
+  text-wrap: balance;
+  color: var(--color-cobalt);
+  visibility: hidden;
+}
+
+.compare__closing[data-shown='true'] {
+  visibility: visible;
+  animation: equation-in 0.5s ease;
+}
+
+/* ------------------------------------------------ a row of index cards ----- */
+
+.cards {
+  display: grid;
+  grid-template-rows: minmax(0, 1fr) auto;
+  grid-template-columns: minmax(0, 1fr);
+  gap: clamp(0.75rem, 2vh, 1.75rem);
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+}
+
+.cards__row {
+  container-type: size;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.6cqw;
+}
+
+/* Parted into its groups on the last press. */
+.cards__row[data-grouped='true'] {
+  gap: 6cqw;
+}
+
+.cards__group {
+  display: grid;
+  gap: 3cqh;
+  justify-items: stretch;
+}
+
+.cards__set {
+  display: flex;
+  gap: 1.6cqw;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.cards__slot {
+  width: min(16cqw, 46cqh);
+  height: min(22cqw, 64cqh);
+}
+
+.cards__card {
+  height: 100%;
+  display: grid;
+  align-content: center;
+  padding: 0 1.2cqw;
+  background: color-mix(in srgb, var(--color-sepia-light) 18%, #fff);
+  border-top: 3px solid var(--color-sepia);
+  box-shadow: 0.35rem 0.4rem 0 color-mix(in srgb, var(--color-ink) 18%, transparent);
+}
+
+.cards__card--ghost {
+  background: color-mix(in srgb, var(--color-sepia-light) 22%, transparent);
+  border-top-color: transparent;
+  box-shadow: none;
+}
+
+.cards__name {
+  font-family: var(--font-display);
+  font-size: min(2.9cqw, 8.4cqh);
+  line-height: 1.02;
+  text-align: center;
+  hyphens: manual;
+  overflow-wrap: anywhere;
+  color: var(--color-ink);
+}
+
+/* A bracket ruled under the group, with its name set beneath. */
+.cards__bracket {
+  position: relative;
+  margin: 0;
+  padding-top: 2.4cqh;
+  font-family: var(--font-serif);
+  font-size: min(2.4cqw, 6.6cqh);
+  line-height: 1;
+  text-align: center;
+  color: var(--color-cobalt);
+  border-top: 3px solid var(--color-cobalt);
+  visibility: hidden;
+}
+
+.cards__bracket::before,
+.cards__bracket::after {
+  content: '';
+  position: absolute;
+  top: calc(-1.6cqh - 3px);
+  width: 3px;
+  height: 1.6cqh;
+  background: var(--color-cobalt);
+}
+
+.cards__bracket::before { left: 0; }
+.cards__bracket::after { right: 0; }
+
+.cards__bracket[data-shown='true'] {
+  visibility: visible;
+  animation: equation-in 0.45s ease;
+}
+
+.cards__body {
+  margin: 0;
+  justify-self: center;
+  max-width: min(80%, 48rem);
+  /* Two lines held open, so the row does not grow when the caption goes. */
+  min-height: 2.5em;
+  font-family: var(--font-serif);
+  font-size: clamp(1.1rem, 2.4vw, 2.1rem);
+  line-height: 1.25;
+  text-align: center;
+  text-wrap: balance;
+  color: var(--color-ink);
+  animation: circles-body 0.4s ease;
+}
+
+/* ---------------------------------------------- four behaviours, a loop ---- */
+
+.loop {
+  display: grid;
+  grid-template-rows: minmax(0, 1fr) auto;
+  grid-template-columns: minmax(0, 1fr);
+  gap: clamp(0.75rem, 2vh, 1.75rem);
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+}
+
+.loop__figure {
+  position: relative;
+  container-type: size;
+}
+
+.loop__ring {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  height: 100%;
+  aspect-ratio: 1;
+  translate: -50% 0;
+  overflow: visible;
+  color: var(--color-ink);
+}
+
+.loop__track {
+  fill: none;
+  stroke: color-mix(in srgb, var(--color-sepia-light) 60%, transparent);
+  stroke-width: 0.6;
+  stroke-dasharray: 1.4 1.6;
+}
+
+.loop__arc {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 0.9;
+  stroke-linecap: round;
+  animation: equation-in 0.45s ease 0.35s backwards;
+}
+
+/* The arc that closes the loop lands after the last behaviour does. */
+.loop__arc--closing {
+  color: var(--color-cobalt);
+  stroke: var(--color-cobalt);
+  animation-delay: 0.9s;
+}
+
+.loop__steps {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.loop__slip {
+  display: block;
+  padding: 2.2cqh 2.4cqh 1.8cqh;
+  background: color-mix(in srgb, var(--color-sepia-light) 18%, #fff);
+  border-top: 3px solid var(--color-sepia);
+  box-shadow: 0.35rem 0.4rem 0 color-mix(in srgb, var(--color-ink) 18%, transparent);
+  font-family: var(--font-display);
+  font-size: min(8cqh, 3.6cqw);
+  line-height: 1;
+  white-space: nowrap;
+  color: var(--color-ink);
+}
+
+.loop__note {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  translate: -50% -50%;
+  width: 34cqh;
+  margin: 0;
+  font-family: var(--font-type);
+  font-size: min(6.4cqh, 3cqw);
+  line-height: 1.35;
+  text-align: center;
+  text-wrap: balance;
+  color: var(--color-cobalt);
+  visibility: hidden;
+}
+
+.loop__note[data-shown='true'] {
+  visibility: visible;
+  animation: equation-in 0.5s ease 1.2s backwards;
+}
+
+.loop__body {
+  margin: 0;
+  justify-self: center;
+  max-width: min(80%, 48rem);
+  font-family: var(--font-serif);
+  font-size: clamp(1.1rem, 2.4vw, 2.1rem);
+  line-height: 1.25;
+  text-align: center;
+  text-wrap: balance;
+  color: var(--color-ink);
+  animation: circles-body 0.4s ease;
+}
+
 /* The console's reduced-effects toggle, and the OS setting, land everything
    at once rather than withholding the point until an animation finishes. */
 [data-reduced-effects='true'] .myths__strike,
@@ -767,7 +1135,14 @@
 [data-reduced-effects='true'] .circles__body,
 [data-reduced-effects='true'] .equation__lhs,
 [data-reduced-effects='true'] .equation__body,
-[data-reduced-effects='true'] .pyramid__body {
+[data-reduced-effects='true'] .pyramid__body,
+[data-reduced-effects='true'] .compare__ledger td,
+[data-reduced-effects='true'] .compare__closing,
+[data-reduced-effects='true'] .cards__bracket,
+[data-reduced-effects='true'] .cards__body,
+[data-reduced-effects='true'] .loop__arc,
+[data-reduced-effects='true'] .loop__note,
+[data-reduced-effects='true'] .loop__body {
   animation: none;
   opacity: 1;
   transform: none;
@@ -786,5 +1161,12 @@
   .circles__body,
   .equation__lhs,
   .equation__body,
-  .pyramid__body { animation: none; opacity: 1; }
+  .pyramid__body,
+  .compare__ledger td,
+  .compare__closing,
+  .cards__bracket,
+  .cards__body,
+  .loop__arc,
+  .loop__note,
+  .loop__body { animation: none; opacity: 1; }
 }

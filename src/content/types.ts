@@ -43,8 +43,7 @@ export type BlockId = 'leadership' | 'purpose' | 'ei' | 'trust' | 'styles' | 'le
 /* ----------------------------------------------------------------- models --
    A framework's model is drawn, not bulleted. Each kind is a different
    physical object on the poster, and each reveals one element per clicker
-   press. Only `styles` is drawn so far; the rest render a visible [TODO]
-   plate until their block is built.
+   press. Each kind has its own component in src/sections/, named after it.
    -------------------------------------------------------------------------- */
 
 export interface StyleCard {

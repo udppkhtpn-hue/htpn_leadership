@@ -95,8 +95,8 @@ repeats the same four beats:
   (Trust · Styles) → Legacy. The map is suppressed on act cards, the cold open
   and the close.
 - **A model that is specified but not drawn renders a visible `[TODO]` plate**,
-  never an empty sheet, so a gap is obvious in rehearsal. Drawn so far:
-  `styles`, `venn`, `circles`, `myths`, `equation`, `pyramid`.
+  never an empty sheet, so a gap is obvious in rehearsal. Every model kind in
+  `types.ts` is now drawn; a new kind needs its own component before it ships.
 - **Framework figures are sized height-first** — `height: 100%` plus
   `aspect-ratio`, with `max-width` as the cap. Sizing one width-first clamps
   only its height, and the parts inside, which take their size from the width,
