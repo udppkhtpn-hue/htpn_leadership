@@ -7,7 +7,7 @@ Two kinds of problem:
 
 - **Empty** — marked `TODO_WRITE`, nothing to show. Pages 7, 9, 10, 14, 15, 18.
 - **Mine** — I wrote placeholder copy so the screen was not blank. It is
-  competent filler, not your argument. Pages 6, 17, and the clipping on 13.
+  competent filler, not your argument. Page 17 and the clipping on 13.
 
 Everything else is your own words from the brief and needs nothing.
 
@@ -31,22 +31,15 @@ statement:
 
 ---
 
-## Page 6 — "You have already led today"  *(mine, rewrite)*
+## The security guard story  *(done)*
 
-**Job:** the first turn in Act I. The room has just told you what the opposite
-of leadership is; this is where you say they are already doing the opposite of
-that.
+Now page 5, `already-led`: the Show beat of Block 0, between the three quotes
+and the word cloud. Your story, as told on 28 October: "Not her job. She did it
+anyway." with the clipping beside it. To fit it inside the hour, page 4 (the
+quotes) went from 2 minutes to 1.5 and the word cloud from 2.5 to 2.
 
-**On screen now:** "You have already led today. You just did not call it that."
-plus an invented clipping about a 3am call.
-
-**What I need from you:** one true story, three or four sentences, of someone
-at HTPN doing something nobody asked them to do. Not a famous example — a ward
-one. Who, what, and the detail that makes it real. I will cut it into the
-headline and the clipping beside it.
-
-If you would rather keep the headline, say so and I will only replace the
-clipping.
+The page numbers in the rest of this file predate the teaching spine and are
+no longer the numbers you press; go by each section's title.
 
 ## Page 7 — the cost figure  *(empty)*
 

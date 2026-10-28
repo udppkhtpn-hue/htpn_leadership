@@ -104,7 +104,7 @@ export const SECTIONS: Section[] = [
     type: 'framework',
     title: 'Framework — what leadership is',
     layout: 'hero-center',
-    minutes: 2,
+    minutes: 1.5,
     block: 'leadership',
     steps: 4,
     stepNotes: [
@@ -139,12 +139,32 @@ export const SECTIONS: Section[] = [
     },
   },
   {
+    id: 'already-led',
+    act: 1,
+    type: 'statement',
+    title: 'Show — the security guard',
+    layout: 'hero-left',
+    minutes: 1,
+    block: 'leadership',
+    notes:
+      'Tell it in your own words, from the clipping. Green zone ED; a Grab dropped her at the wrong emergency department; her husband trying to book another car to WCC; the guard comes out with a wheelchair and pushes her all the way to the labour ward, which was still the old one then.\n\nThen the line: pushing patients is not in her job scope. She did it anyway. Nobody gave her a rank for it. That is the Sinek quote they have just read, in our own corridor.',
+    props: {
+      drawing: 'hand',
+      clipping: {
+        kicker: 'Green zone, ED',
+        headline: 'The wrong emergency department',
+        body: 'A Grab dropped a woman in labour at the wrong emergency department. She sat outside in a chair while her husband tried to book another car to WCC. A security guard went in, came back with a wheelchair, and pushed her all the way to the labour ward herself.',
+      },
+      headline: 'Not her job. She did it anyway.',
+    },
+  },
+  {
     id: 'wc-opposite',
     act: 1,
     type: 'wordcloud',
     title: 'Try — the opposite of leadership',
     layout: 'board',
-    minutes: 2.5,
+    minutes: 2,
     block: 'leadership',
     module: { kind: 'wordcloud', promptId: 'wc-opposite' },
     notes:
