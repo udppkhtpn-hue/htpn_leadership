@@ -187,19 +187,41 @@ export const SECTIONS: Section[] = [
      0:10–0:17 · The reality, then the distinction
      ===================================================================== */
   {
+    id: 'data-resignations',
+    act: 1,
+    type: 'data',
+    title: 'Show — resignations',
+    layout: 'clipping-right',
+    minutes: 0.5,
+    block: 'leadership',
+    notes:
+      'Give the number, then be quiet for three seconds.\n\nIf asked: 4,380 contract and 1,832 permanent. Contract resignations peaked at 1,354 in 2022; permanent ones have risen every year, 238 in 2021 to 498 in 2025. Written Dewan Negara reply to Senator Robert Lau, 4 August 2026, reported by CodeBlue on 14 August.',
+    props: {
+      clipping: {
+        kicker: 'Dewan Negara, August 2026',
+        headline: 'Five years, 6,212 doctors',
+        body: 'Between 2021 and 2025, 4,380 contract and 1,832 permanent medical officers resigned from the Ministry of Health. Contract resignations peaked in 2022. Permanent ones rose every year, from 238 in 2021 to 498 in 2025.',
+      },
+      value: '6,212',
+      label: 'Medical officers who resigned from the Ministry of Health, 2021–2025.',
+      source: 'Dzulkefly Ahmad, written Dewan Negara reply, 2026.',
+    },
+  },
+  {
     id: 'data-vacancies',
     act: 1,
     type: 'data',
     title: 'Show — vacant posts',
     layout: 'clipping-right',
-    minutes: 1,
+    minutes: 0.5,
     block: 'leadership',
-    notes: 'Give the number, then be quiet for three seconds.',
+    notes:
+      'Give the number, then be quiet for three seconds.\n\nIf asked: 1,660 specialist and 11,412 non-specialist posts, as at 30 June 2026. Written Dewan Rakyat reply to the Klang MP, 21 October 2026.',
     props: {
       drawing: 'stethoscope',
       value: '13,072',
-      label: 'Vacant posts in the Ministry of Health.',
-      source: 'TODO_WRITE — source and year for the 13,072 figure.',
+      label: 'Vacant doctors’ posts in the Ministry of Health, as at 30 June 2026.',
+      source: 'Dzulkefly Ahmad, written Dewan Rakyat reply, 2026.',
     },
   },
   {
@@ -608,7 +630,7 @@ export const SECTIONS: Section[] = [
     notes: 'Plays on enter. Press B if the room needs to talk before it ends.',
     props: {
       src: '/media/swenson.mp4',
-      caption: 'TODO_WRITE — one line of attribution.',
+      caption: 'Capt. William Swenson, Ganjgal, Afghanistan, 2009. US Army helmet-camera footage.',
     },
   },
   {
