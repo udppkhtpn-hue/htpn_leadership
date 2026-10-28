@@ -47,25 +47,35 @@ export function PyramidModel({
 
   return (
     <div className="pyramid">
-      <div className="pyramid__figure">
+      {/* Base first in the list, as it is built and as it is read. */}
+      <ol className="pyramid__figure">
         {levels.map((level, index) => {
           const { top, height, clipPath } = band(index, levels.length)
           const place = { position: 'absolute', left: 0, right: 0, top: `${top}%`, height: `${height}%` } as const
           if (index > step) {
-            return <div key={level.name} className="pyramid__level pyramid__level--ghost" style={{ ...place, clipPath }} />
+            return (
+              <li
+                key={level.name}
+                className="pyramid__level pyramid__level--ghost"
+                style={{ ...place, clipPath }}
+                aria-hidden="true"
+              />
+            )
           }
           return (
-            <Drop key={level.name} seed={`pyramid:${level.name}`} rotate={0} style={place}>
-              <div
-                className={index === 0 ? 'pyramid__level pyramid__level--base' : 'pyramid__level'}
-                style={{ clipPath }}
-              >
-                <span className="pyramid__name">{level.name}</span>
-              </div>
-            </Drop>
+            <li key={level.name} style={place}>
+              <Drop seed={`pyramid:${level.name}`} rotate={0} style={{ height: '100%' }}>
+                <div
+                  className={index === 0 ? 'pyramid__level pyramid__level--base' : 'pyramid__level'}
+                  style={{ clipPath }}
+                >
+                  <span className="pyramid__name">{level.name}</span>
+                </div>
+              </Drop>
+            </li>
           )
         })}
-      </div>
+      </ol>
       <p className="pyramid__body" key={current.name}>
         {current.body}
       </p>

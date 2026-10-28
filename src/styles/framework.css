@@ -652,7 +652,6 @@
   background: var(--color-cobalt);
   border-top-color: var(--color-cobalt);
   color: var(--color-cream);
-  transition: background-color 0.4s ease, color 0.4s ease;
 }
 
 .equation__bar {
@@ -665,6 +664,16 @@
 
 .equation__bar[data-shown='true'] {
   animation: strike 0.45s ease forwards;
+}
+
+/* Heard, not seen. */
+.equation__said {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
 }
 
 .equation__body {
@@ -704,6 +713,9 @@
   aspect-ratio: 100 / 72;
   justify-self: center;
   container-type: size;
+  margin: 0;
+  padding: 0;
+  list-style: none;
 }
 
 .pyramid__level {
@@ -764,7 +776,6 @@
 [data-reduced-effects='true'] .myths__strike { transform: scaleX(1); }
 [data-reduced-effects='true'] .equation__bar { animation: none; }
 [data-reduced-effects='true'] .equation__bar[data-shown='true'] { transform: scaleX(1); }
-[data-reduced-effects='true'] .equation__slip--lever { transition: none; }
 
 @media (prefers-reduced-motion: reduce) {
   .myths__strike { animation: none; transform: scaleX(1); }
@@ -776,5 +787,4 @@
   .equation__lhs,
   .equation__body,
   .pyramid__body { animation: none; opacity: 1; }
-  .equation__slip--lever { transition: none; }
 }

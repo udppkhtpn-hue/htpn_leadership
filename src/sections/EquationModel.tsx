@@ -53,7 +53,10 @@ export function EquationModel({
             ))}
           </div>
 
-          <div className="equation__bar" data-shown={step >= dividedAt} />
+          <div className="equation__bar" data-shown={step >= dividedAt}>
+            {/* The bar is drawn, so the division has to be said as well. */}
+            {step >= dividedAt ? <span className="equation__said">divided by</span> : null}
+          </div>
 
           <div className="equation__bottom">
             {step >= dividedAt ? (
