@@ -1,6 +1,9 @@
 import { Stamp } from '../collage'
 import type { Framework, FrameworkModel } from '../content/types'
 import { StylesModel } from './StylesModel'
+import { VennModel } from './VennModel'
+import { CirclesModel } from './CirclesModel'
+import { MythsModel } from './MythsModel'
 
 /* ---------------------------------------------------------------------------
    A framework screen is a specimen sheet: a small typewritten header, the
@@ -14,6 +17,15 @@ import { StylesModel } from './StylesModel'
 function Model({ model, step }: { model: FrameworkModel; step: number }) {
   if (model.kind === 'styles') {
     return <StylesModel cards={model.cards} closing={model.closing} step={step} />
+  }
+  if (model.kind === 'venn') {
+    return <VennModel left={model.left} right={model.right} overlap={model.overlap} step={step} />
+  }
+  if (model.kind === 'circles') {
+    return <CirclesModel rings={model.rings} step={step} />
+  }
+  if (model.kind === 'myths') {
+    return <MythsModel pairs={model.pairs} step={step} />
   }
   return (
     <p className="fw__todo">

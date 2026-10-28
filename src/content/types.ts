@@ -70,10 +70,18 @@ export type FrameworkModel =
   | { kind: 'equation'; terms: { name: string; body: string }[]; divisor: { name: string; body: string } }
   | { kind: 'pyramid'; levels: { name: string; body: string }[] }
   | { kind: 'loop'; steps: { name: string; body: string }[]; note?: string }
-  | { kind: 'venn'; left: { name: string; body: string }; right: { name: string; body: string }; overlap: string }
+  | {
+      kind: 'venn'
+      left: { name: string; body: string }
+      right: { name: string; body: string }
+      /** What exists only where the two overlap. */
+      overlap: { name: string; body: string }
+    }
+  /** Concentric rings, revealed from the centre outwards. */
   | { kind: 'circles'; rings: { name: string; body: string }[] }
   | { kind: 'quotes'; quotes: { text: string; source: string }[] }
-  | { kind: 'list'; items: { name: string; body: string }[] }
+  /** A myth struck through, and the truth set under it. One pair per step. */
+  | { kind: 'myths'; pairs: { myth: string; truth: string }[] }
 
 export interface Framework {
   /** The framework's own name, set as a label rather than a hero. */

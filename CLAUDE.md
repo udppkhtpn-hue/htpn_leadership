@@ -95,7 +95,13 @@ repeats the same four beats:
   (Trust · Styles) → Legacy. The map is suppressed on act cards, the cold open
   and the close.
 - **A model that is specified but not drawn renders a visible `[TODO]` plate**,
-  never an empty sheet, so a gap is obvious in rehearsal.
+  never an empty sheet, so a gap is obvious in rehearsal. Drawn so far:
+  `styles`, `venn`, `circles`, `myths`.
+- **Framework figures are sized height-first** — `height: 100%` plus
+  `aspect-ratio`, with `max-width` as the cap. Sizing one width-first clamps
+  only its height, and the parts inside, which take their size from the width,
+  then hang off the bottom of a sheet that cannot scroll. For the same reason a
+  figure's grid row is `minmax(0, 1fr)`, never `1fr`.
 - **One source of truth for the six styles:** `src/content/styles.ts`. The vote
   reveal reads its labels and correlations from the same cards the framework
   screen reveals, so the two can never disagree about a number.

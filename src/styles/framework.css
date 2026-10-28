@@ -322,3 +322,252 @@
 .progress-map__arrow {
   opacity: 0.5;
 }
+
+/* ------------------------------------------- values and purpose, as discs -- */
+
+.venn {
+  display: grid;
+  /* minmax(0, 1fr), not 1fr: the figure's aspect-derived height is its
+     min-content size, so a plain 1fr lets it push the label off the sheet. */
+  grid-template-rows: minmax(0, 1fr) auto;
+  gap: clamp(1rem, 2.5vh, 2rem);
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  justify-items: center;
+}
+
+.venn__figure {
+  position: relative;
+  /* Two discs at 58% of the width, overlapping by 16%. A projector cannot
+     scroll, so the figure is capped by the height it has as well as the
+     width, and shrinks to whichever runs out first. */
+  /* Height-first: the row's height is the definite dimension and the width
+     follows from it, so the figure can never be wider than the sheet is tall
+     allows. Sizing it width-first clamps only the height and the discs, which
+     take their size from the width, then hang off the bottom. */
+  height: 100%;
+  max-width: min(88%, 64rem);
+  aspect-ratio: 100 / 58;
+  justify-self: center;
+  align-self: center;
+}
+
+.venn__disc {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1;
+  border: 3px solid var(--color-ink);
+  border-radius: 50%;
+  /* Drawn, not filled. A fill on the upper disc would hide the lower one's
+     arc exactly where the two meet, which is the one part that matters. */
+  background: transparent;
+  /* Clips the lens to this disc, which is what makes the intersection. */
+  overflow: hidden;
+}
+
+.venn__lens {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: var(--color-cobalt);
+  animation: venn-pool 0.5s ease forwards;
+}
+
+@keyframes venn-pool {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.venn__label {
+  position: absolute;
+  top: 50%;
+  translate: 0 -50%;
+  width: 58%;
+  display: grid;
+  gap: 0.4rem;
+  text-align: center;
+  z-index: 2;
+}
+
+.venn__label--left { left: 5%; }
+.venn__label--right { right: 5%; }
+
+.venn__name {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 3.4vw, 3.25rem);
+  line-height: 0.95;
+  color: var(--color-ink);
+}
+
+.venn__body {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: clamp(0.85rem, 1.25vw, 1.25rem);
+  line-height: 1.3;
+  color: color-mix(in srgb, var(--color-ink) 80%, var(--color-cream));
+  text-wrap: balance;
+}
+
+.venn__overlap {
+  margin: 0;
+  text-align: center;
+  font-family: var(--font-serif);
+  font-size: clamp(1.4rem, 2.8vw, 2.5rem);
+  line-height: 1.15;
+  color: var(--color-cobalt);
+  text-wrap: balance;
+  opacity: 0;
+  transition: opacity 0.45s ease 0.25s;
+}
+
+.venn__overlap[data-shown='true'] { opacity: 1; }
+
+/* --------------------------------------------- concentric rings ------------ */
+
+.circles {
+  display: grid;
+  grid-template-rows: minmax(0, 1fr) auto;
+  gap: clamp(0.75rem, 2vh, 1.75rem);
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  justify-items: center;
+}
+
+.circles__figure {
+  position: relative;
+  height: 100%;
+  max-width: 100%;
+  aspect-ratio: 1;
+  justify-self: center;
+}
+
+.circles__ring {
+  width: 100%;
+  aspect-ratio: 1;
+  border: 3px solid var(--color-ink);
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--color-sepia-light) 14%, #fff);
+  display: grid;
+  align-content: end;
+  justify-items: center;
+  padding-bottom: 1.5%;
+}
+
+/* The centre of the argument is the one place the deck inverts its type. */
+.circles__ring--core {
+  background: var(--color-cobalt);
+  border-color: var(--color-cobalt);
+  align-content: center;
+  padding-bottom: 0;
+}
+
+.circles__name {
+  font-family: var(--font-display);
+  font-size: clamp(1.1rem, 2.6vh, 2.6rem);
+  line-height: 1;
+  color: var(--color-ink);
+}
+
+.circles__ring--core .circles__name {
+  color: var(--color-cream);
+  font-size: clamp(1.4rem, 3.4vh, 3.25rem);
+}
+
+.circles__body {
+  margin: 0;
+  max-width: min(80%, 48rem);
+  font-family: var(--font-serif);
+  font-size: clamp(1.1rem, 2.4vw, 2.1rem);
+  line-height: 1.25;
+  text-align: center;
+  text-wrap: balance;
+  color: var(--color-ink);
+  animation: circles-body 0.4s ease;
+}
+
+@keyframes circles-body {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* ------------------------------------------------------ myth-busting ------- */
+
+.myths {
+  display: grid;
+  gap: clamp(1.25rem, 3vh, 2.75rem);
+  justify-items: center;
+  align-content: center;
+  width: min(84%, 62rem);
+  margin: auto;
+  text-align: center;
+}
+
+.myths__myth {
+  position: relative;
+  margin: 0;
+  font-family: var(--font-type);
+  font-size: clamp(1.5rem, 3.4vw, 3rem);
+  line-height: 1.2;
+  color: color-mix(in srgb, var(--color-ink) 62%, var(--color-cream));
+  text-wrap: balance;
+}
+
+/* The correction, drawn across the myth rather than implied by a colour. */
+.myths__strike {
+  position: absolute;
+  left: -1.5%;
+  right: -1.5%;
+  top: 50%;
+  height: 0.13em;
+  /* Centred on the line, not hung from its middle. */
+  margin-top: -0.065em;
+  background: var(--color-cobalt);
+  transform-origin: left center;
+  transform: scaleX(0);
+  animation: strike 0.45s ease 0.5s forwards;
+}
+
+@keyframes strike {
+  to { transform: scaleX(1); }
+}
+
+.myths__truth {
+  margin: 0;
+  font-family: var(--font-serif);
+  font-size: clamp(1.75rem, 4vw, 3.5rem);
+  line-height: 1.2;
+  color: var(--color-ink);
+  text-wrap: balance;
+  opacity: 0;
+  animation: truth-in 0.5s ease 0.9s forwards;
+}
+
+@keyframes truth-in {
+  from { opacity: 0; transform: translateY(0.4rem); }
+  to { opacity: 1; transform: none; }
+}
+
+/* The console's reduced-effects toggle, and the OS setting, land everything
+   at once rather than withholding the point until an animation finishes. */
+[data-reduced-effects='true'] .myths__strike,
+[data-reduced-effects='true'] .myths__truth,
+[data-reduced-effects='true'] .venn__lens,
+[data-reduced-effects='true'] .circles__body {
+  animation: none;
+  opacity: 1;
+  transform: none;
+}
+
+[data-reduced-effects='true'] .myths__strike { transform: scaleX(1); }
+
+@media (prefers-reduced-motion: reduce) {
+  .myths__strike { animation: none; transform: scaleX(1); }
+  .myths__truth,
+  .venn__lens,
+  .circles__body { animation: none; opacity: 1; }
+}

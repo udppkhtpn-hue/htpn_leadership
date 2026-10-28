@@ -299,9 +299,9 @@ export const SECTIONS: Section[] = [
         source: 'Iclif / Asia School of Business',
         model: {
           kind: 'venn',
-          left: { name: 'Values', body: 'WHO you are.' },
-          right: { name: 'Purpose', body: 'WHAT you lead toward.' },
-          overlap: 'The problem you care about.',
+          left: { name: 'Values', body: 'WHO you are. The principles that guide you when tested.' },
+          right: { name: 'Purpose', body: 'WHAT you lead toward. The results you want to create.' },
+          overlap: { name: 'Your why', body: 'The problem you care about.' },
         },
       },
     },
@@ -315,8 +315,13 @@ export const SECTIONS: Section[] = [
     minutes: 1.5,
     block: 'purpose',
     steps: 3,
-    stepNotes: ['Why.', 'How.', 'What. Most of us start here and never get back out.'],
-    notes: 'Teach. Short. It is a lens on the previous screen, not a new idea.',
+    stepNotes: [
+      'Why. The belief. Start here.',
+      'How. The way of working that makes the belief real.',
+      'What. The tasks on the list. Most of us start here and never get back out.',
+    ],
+    notes:
+      'Teach. Short — it is a lens on the previous screen, not a new idea.\n\nIt builds outwards from the centre, which is the whole argument. Do not let anyone read it from the outside in.',
     props: {
       framework: {
         name: 'The Golden Circle',
@@ -343,26 +348,42 @@ export const SECTIONS: Section[] = [
     block: 'purpose',
     steps: 5,
     stepNotes: [
-      'A verb, not a cause.',
-      'A universal need, not a luxury.',
+      'A verb, not a noun. Not a cause you sign up to.',
+      'A universal need, not a luxury for people whose money is sorted.',
       'A journey, not a revelation. Nobody gets struck by lightning.',
-      'Found in any job. Including this one, on a bad week.',
-      'Requires constant hard work.',
+      'Any job. Including this one, on a bad week.',
+      'Constant hard work. It is maintained, not discovered.',
     ],
-    notes: 'Teach. Aimed at the HO who thinks purpose is for people with time.',
+    notes:
+      'Teach. Aimed at the HO who thinks purpose is for people with time.\n\nRead the myth, let it sit for a beat, then strike it. Five presses, five corrections.',
     props: {
       framework: {
-        name: 'Five myths about purpose',
+        name: 'Purpose myth-busting',
         definition: 'Purpose is not a calling that arrives. It is something you do.',
         source: 'Aaron Hurst, The Purpose Economy, 2014',
         model: {
-          kind: 'list',
-          items: [
-            { name: 'A verb', body: 'Not a cause.' },
-            { name: 'A universal need', body: 'Not a luxury.' },
-            { name: 'A journey', body: 'Not a revelation.' },
-            { name: 'Found in any job', body: 'Including this one.' },
-            { name: 'Constant hard work', body: 'It is maintained, not discovered.' },
+          kind: 'myths',
+          pairs: [
+            {
+              myth: 'Purpose is a cause.',
+              truth: 'It is an approach to work and to serving others. A verb, not a noun.',
+            },
+            {
+              myth: 'Purpose is a luxury.',
+              truth: 'It is a universal need, not something you earn once the money is sorted.',
+            },
+            {
+              myth: 'Purpose arrives as a revelation.',
+              truth: 'It is a journey. It comes from living awake and seeking new experiences, not from above.',
+            },
+            {
+              myth: 'Only some work generates purpose.',
+              truth: 'You can find it in any job. It is all in how you approach it.',
+            },
+            {
+              myth: 'Purpose is easy.',
+              truth: 'It takes constant hard work, and giving of yourself.',
+            },
           ],
         },
       },
