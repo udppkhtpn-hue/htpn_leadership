@@ -175,6 +175,26 @@ points there). Every push to `main` redeploys it.
 
 Media and copy still outstanding: see `ASSETS.md`.
 
+## Working on another machine
+
+`git clone` then `npm ci` gets you a working checkout — Node 24, the same
+version CI builds with. Three things the repository deliberately does not
+carry:
+
+- **`reference/`** — the four source PDFs (ASB's deck, the two HBR articles,
+  the Iclif piece). Gitignored: the Goleman reprint is watermarked for NHS
+  Leadership Academy use only and the ASB deck is not for public sharing, so
+  they are never committed and never served. Copy the folder across by hand.
+- **`public/media/`** — `swenson.mp4` and `empathy.mp4` still do not exist
+  anywhere. Those two screens show a labelled placeholder until they do.
+- **clasp's credentials** — `.clasp.json` is in the repository and is not a
+  secret, but the login lives in `~/.clasprc.json`. Run `clasp login` as
+  `ffairis@gmail.com` before `npm run backend:push`.
+
+Nothing else is machine-specific. The Apps Script URL is in `src/config.ts`
+and is public by design; the presenter PIN lives only in Apps Script
+Properties, so there is nothing local to copy.
+
 ## Design tools
 
 ### Always load `frontend-design` first
